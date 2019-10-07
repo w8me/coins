@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@+id/coinsListFragment">
+
+    <fragment
+        android:id="@+id/coinsListFragment"
+        android:name="com.iwelogic.coins.list.CoinListFragment"
+        android:label="Coins"
+        tools:layout="@layout/fragment_coin_list" >
+
+        <action
+            android:id="@+id/coinDetails"
+            app:destination="@+id/coinDetailsFragment"
+            app:enterAnim="@anim/fragment_open"
+            app:exitAnim="@anim/fragment_no_animation"
+            app:launchSingleTop="false"
+            app:popEnterAnim="@anim/fragment_no_animation"
+            app:popExitAnim="@anim/fragment_back"
+            app:popUpTo="@+id/coinsListFragment"
+            app:popUpToInclusive="false" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/coinDetailsFragment"
+        android:name="com.iwelogic.coins.details.CoinDetailsFragment"
+        android:label="Details"
+        tools:layout="@layout/fragment_coin_details" >
+        <argument
+            android:name="coin"
+            app:argType="com.iwelogic.coins.models.Coin" />
+    </fragment>
+
+</navigation>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="android.view.View" />
+
+        <import type="android.widget.CompoundButton" />
+
+        <variable
+            name="viewModelFrag"
+            type="com.iwelogic.coins.details.CoinDetailsViewModel" />
+    </data>
+
+    <FrameLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".details.CoinDetailsFragment"
+        android:id="@+id/main"
+        android:elevation="1dp">
+
+        <Button
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="@string/coin_details"
+            android:textSize="50sp" />
+
+    </FrameLayout>
+</layout>

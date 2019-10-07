@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">coins</string>
+    <string name="coin_details">Coin details</string>
+</resources>

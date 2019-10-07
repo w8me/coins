@@ -1,11 +1,9 @@
 package com.iwelogic.coins.list
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.iwelogic.coins.data.ApiModule
-import com.iwelogic.coins.data.DataBase
 import com.iwelogic.coins.models.Coin
 import kotlinx.coroutines.launch
 

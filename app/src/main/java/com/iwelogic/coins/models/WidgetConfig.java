@@ -3,7 +3,16 @@ package com.iwelogic.coins.models;
 public class WidgetConfig {
     private int backgroundAlpha;
     private int backgroundRgb;
+    private int background;
     private int textColor;
+
+    public int getBackground() {
+        return background;
+    }
+
+    public void setBackground(int background) {
+        this.background = background;
+    }
 
     public int getBackgroundAlpha() {
         return backgroundAlpha;

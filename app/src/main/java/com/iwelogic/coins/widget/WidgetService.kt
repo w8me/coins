@@ -71,7 +71,7 @@ class WidgetService : Service() {
                 val queries = HashMap<String, Any>()
                 queries["order"] = "market_cap_desc"
                 queries["vs_currency"] = "usd"
-                val coins = ApiModule.getApi().getCoins(queries)
+                val coins = ApiModule.api.getCoins(queries)
                 for (widgetId in widgetIds) {
                     changeWidget(coins, widgetId)
                 }
@@ -97,7 +97,7 @@ class WidgetService : Service() {
 
         val icon = Glide.with(this@WidgetService.baseContext)
             .asBitmap()
-            .load(coins[0].getImage())
+            .load(coins[0].image)
             .submit(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
             .get()
         remoteView.setImageViewBitmap(R.id.icon, icon)

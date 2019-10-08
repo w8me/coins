@@ -30,7 +30,7 @@ class CoinDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val coin: Coin = CoinDetailsFragmentArgs.fromBundle(arguments!!).coin
-        (activity as MainActivity).updateTitle(coin.name)
+        coin.name?.let { (activity as MainActivity).updateTitle(it) }
         title.text = coin.name
     }
 }

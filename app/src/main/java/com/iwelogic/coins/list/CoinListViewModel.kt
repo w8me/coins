@@ -19,7 +19,7 @@ class CoinListViewModel : ViewModel() {
                 val queries = HashMap<String, Any>()
                 queries["order"] = "market_cap_desc"
                 queries["vs_currency"] = "usd"
-                val postsRequest = ApiModule.getApi().getCoins(queries)
+                val postsRequest = ApiModule.api.getCoins(queries)
                 mCoins.value = postsRequest
             }.onFailure {
                 it.printStackTrace()

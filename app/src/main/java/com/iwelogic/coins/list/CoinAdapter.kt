@@ -6,11 +6,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.iwelogic.coins.R
-import com.iwelogic.coins.base.BaseRecyclerViewAdapter
+import com.iwelogic.coins.base.BaseRecyclerAdapter
 import com.iwelogic.coins.databinding.ItemCoinBinding
 import com.iwelogic.coins.models.Coin
 
-class CoinAdapter(items: MutableLiveData<MutableList<Coin>>) : BaseRecyclerViewAdapter<Coin>(items) {
+class CoinAdapter(items: MutableLiveData<MutableList<Coin>>) : BaseRecyclerAdapter<Coin>(items) {
 
     var onItemClick: ((Coin) -> Unit)? = null
 

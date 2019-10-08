@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_coin_details.*
 
 class CoinDetailsFragment : Fragment() {
 
-    lateinit var viewModel: CoinDetailsViewModel
+    private lateinit var viewModel: CoinDetailsViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewModel = ViewModelProviders.of(this).get(CoinDetailsViewModel::class.java)

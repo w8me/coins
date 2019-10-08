@@ -20,8 +20,8 @@ import kotlinx.android.synthetic.main.activity_edit_widget.*
 
 class EditWidgetActivity : AppCompatActivity() {
 
-    lateinit var viewModel: EditWidgetViewModel
-     var mWidgetId: Int = 0
+    private lateinit var viewModel: EditWidgetViewModel
+    private var mWidgetId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +29,7 @@ class EditWidgetActivity : AppCompatActivity() {
 
         viewModel = ViewModelProviders.of(this).get(EditWidgetViewModel::class.java)
 
-        val binding : ActivityEditWidgetBinding  = DataBindingUtil.setContentView(this, R.layout.activity_edit_widget)
+        val binding: ActivityEditWidgetBinding = DataBindingUtil.setContentView(this, R.layout.activity_edit_widget)
         binding.viewModel = viewModel
 
         mWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, 0)
@@ -60,7 +60,7 @@ class EditWidgetActivity : AppCompatActivity() {
                 .initialColor(Color.BLUE)
                 .wheelType(ColorPickerView.WHEEL_TYPE.FLOWER)
                 .density(12)
-                .setPositiveButton("ok") { dialog, selectedColor, allColors ->
+                .setPositiveButton("ok") { _, selectedColor, allColors ->
                     viewModel.setBackgroundColor(selectedColor, Color.alpha(selectedColor), Color.rgb(Color.red(selectedColor), Color.green(selectedColor), Color.blue(selectedColor)))
                 }
                 .build()

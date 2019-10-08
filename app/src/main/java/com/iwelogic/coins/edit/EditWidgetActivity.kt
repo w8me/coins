@@ -17,7 +17,6 @@ import com.iwelogic.coins.widget.CoinWidget
 import com.iwelogic.coins.widget.WidgetService.Companion.REFRESH_WIDGET
 import kotlinx.android.synthetic.main.activity_edit_widget.*
 
-
 class EditWidgetActivity : AppCompatActivity() {
 
     private lateinit var viewModel: EditWidgetViewModel

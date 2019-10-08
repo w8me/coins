@@ -79,10 +79,7 @@ class Coin() : Parcelable {
     @BindingAdapter("image")
     fun loadImage(imageView: ImageView, imageURL: String) {
         Glide.with(imageView.context)
-            .setDefaultRequestOptions(
-                RequestOptions()
-                    .circleCrop()
-            )
+            .setDefaultRequestOptions(RequestOptions().circleCrop())
             .load(imageURL)
             .into(imageView)
     }

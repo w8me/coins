@@ -61,9 +61,7 @@ class WidgetService : Service() {
         }
 
         for (widgetId in widgetIds!!) {
-            val remoteView = RemoteViews(this.applicationContext.packageName, R.layout.widget_coin)
-            remoteView.setViewVisibility(R.id.progressBar, View.VISIBLE)
-            AppWidgetManager.getInstance(this).partiallyUpdateAppWidget(widgetId, remoteView)
+            showProgress(true, widgetId)
         }
 
         GlobalScope.launch {
@@ -77,6 +75,10 @@ class WidgetService : Service() {
                 }
                 stopSelf()
             }.onFailure {
+                for (widgetId in widgetIds) {
+                    showProgress(false, widgetId)
+                }
+
                 it.printStackTrace()
                 stopSelf()
             }
@@ -108,6 +110,12 @@ class WidgetService : Service() {
         refreshWidget.data = Uri.parse(refreshWidget.toUri(Intent.URI_INTENT_SCHEME))
         val pendingRefresh = PendingIntent.getBroadcast(this.applicationContext, 0, refreshWidget, 0)
         remoteView.setOnClickPendingIntent(R.id.main, pendingRefresh)
+        AppWidgetManager.getInstance(this).partiallyUpdateAppWidget(widgetId, remoteView)
+    }
+
+    private fun showProgress(status: Boolean, widgetId: Int) {
+        val remoteView = RemoteViews(this.applicationContext.packageName, R.layout.widget_coin)
+        remoteView.setViewVisibility(R.id.progressBar, View.VISIBLE)
         AppWidgetManager.getInstance(this).partiallyUpdateAppWidget(widgetId, remoteView)
     }
 }

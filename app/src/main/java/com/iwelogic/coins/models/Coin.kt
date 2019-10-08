@@ -76,12 +76,18 @@ class Coin() : Parcelable {
     constructor(parcel: Parcel) : this() {
     }
 
-    @BindingAdapter("image")
-    fun loadImage(imageView: ImageView, imageURL: String) {
-        Glide.with(imageView.context)
-            .setDefaultRequestOptions(RequestOptions().circleCrop())
-            .load(imageURL)
-            .into(imageView)
+    object DataBindingAdapter {
+        @BindingAdapter("android:src")
+        @JvmStatic
+        fun loadImage(imageView: ImageView, imageURL: String) {
+            Glide.with(imageView.context)
+                .setDefaultRequestOptions(
+                    RequestOptions()
+                        .circleCrop()
+                )
+                .load(imageURL)
+                .into(imageView)
+        }
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

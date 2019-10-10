@@ -1,4 +1,4 @@
-package com.iwelogic.coins.edit
+package com.iwelogic.coins.ui.edit
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

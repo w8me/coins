@@ -1,4 +1,4 @@
-package com.iwelogic.coins.widget
+package com.iwelogic.coins.ui.widget
 
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
-import com.iwelogic.coins.widget.WidgetService.Companion.REFRESH_WIDGET
+import com.iwelogic.coins.ui.widget.WidgetService.Companion.REFRESH_WIDGET
 
 class CoinWidget : AppWidgetProvider(){
 

@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.iwelogic.coins.edit.EditWidgetViewModel" />
+            type="com.iwelogic.coins.ui.edit.EditWidgetViewModel" />
     </data>
 
 

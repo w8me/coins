@@ -1,4 +1,4 @@
-package com.iwelogic.coins.list
+package com.iwelogic.coins.ui.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

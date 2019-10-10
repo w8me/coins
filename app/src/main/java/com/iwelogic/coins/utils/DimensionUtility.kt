@@ -1,4 +1,4 @@
-package com.iwelogic.coins
+package com.iwelogic.coins.utils
 
 import android.content.Context
 import android.util.DisplayMetrics

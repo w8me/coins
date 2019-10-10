@@ -1,4 +1,4 @@
-package com.iwelogic.coins.widget
+package com.iwelogic.coins.ui.widget
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

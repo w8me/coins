@@ -1,4 +1,4 @@
-package com.iwelogic.coins
+package com.iwelogic.coins.utils
 
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat

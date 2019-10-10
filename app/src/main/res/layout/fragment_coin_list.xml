@@ -10,13 +10,13 @@
 
         <variable
             name="viewModelFrag"
-            type="com.iwelogic.coins.list.CoinListViewModel" />
+            type="com.iwelogic.coins.ui.list.CoinListViewModel" />
     </data>
 
     <FrameLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".details.CoinDetailsFragment">
+        tools:context=".ui.details.CoinDetailsFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"

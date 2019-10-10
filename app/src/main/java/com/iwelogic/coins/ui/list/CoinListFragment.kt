@@ -1,4 +1,4 @@
-package com.iwelogic.coins.list
+package com.iwelogic.coins.ui.list
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

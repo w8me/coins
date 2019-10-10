@@ -1,4 +1,4 @@
-package com.iwelogic.coins.edit
+package com.iwelogic.coins.ui.edit
 
 import android.app.Activity
 import android.appwidget.AppWidgetManager
@@ -14,8 +14,8 @@ import androidx.lifecycle.Observer
 import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
 import com.iwelogic.coins.databinding.ActivityEditWidgetBinding
-import com.iwelogic.coins.widget.CoinWidget
-import com.iwelogic.coins.widget.WidgetService.Companion.REFRESH_WIDGET
+import com.iwelogic.coins.ui.widget.CoinWidget
+import com.iwelogic.coins.ui.widget.WidgetService.Companion.REFRESH_WIDGET
 import kotlinx.android.synthetic.main.activity_edit_widget.*
 
 class EditWidgetActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.iwelogic.coins
+package com.iwelogic.coins.data
 
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer

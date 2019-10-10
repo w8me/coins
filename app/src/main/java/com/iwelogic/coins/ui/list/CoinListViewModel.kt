@@ -1,4 +1,4 @@
-package com.iwelogic.coins.list
+package com.iwelogic.coins.ui.list
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

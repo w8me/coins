@@ -1,4 +1,4 @@
-package com.iwelogic.coins.details
+package com.iwelogic.coins.ui.details
 
 import android.util.Log
 import androidx.databinding.ObservableArrayList

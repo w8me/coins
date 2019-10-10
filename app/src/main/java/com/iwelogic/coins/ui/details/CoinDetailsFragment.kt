@@ -1,4 +1,4 @@
-package com.iwelogic.coins.details
+package com.iwelogic.coins.ui.details
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.iwelogic.coins.MainActivity
+import com.iwelogic.coins.ui.MainActivity
 import com.iwelogic.coins.R
 import com.iwelogic.coins.databinding.FragmentCoinDetailsBinding
 import com.iwelogic.coins.models.Coin

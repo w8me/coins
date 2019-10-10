@@ -1,7 +1,10 @@
-package com.iwelogic.coins
+package com.iwelogic.coins.ui.details
 
 import android.graphics.Typeface
+import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.databinding.BindingAdapter
+import androidx.databinding.ObservableList
 import com.cfin.cryptofin.entity.HistoryEntity
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.AxisBase
@@ -10,12 +13,25 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
+import com.iwelogic.coins.utils.DimensionUtility
+import com.iwelogic.coins.R
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
-class ChartUtility {
+class BindingChart {
     companion object {
+
+        @BindingAdapter("chartData")
+        @JvmStatic
+        fun setChartData(lineChart: LineChart, history: ObservableList<HistoryEntity>) {
+            if (history.size > 0) {
+                setupLineChart(lineChart, history.toList())
+                lineChart.visibility = View.VISIBLE
+            } else {
+                lineChart.visibility = View.GONE
+            }
+        }
+
         fun setupLineChart(lineChart: LineChart, history: List<HistoryEntity>) {
             val context = lineChart.context
             val maxVisibleValues = 365 * 5
@@ -102,54 +118,56 @@ class ChartUtility {
             lineChart.animateY(1000)
         }
 
-        fun determineDate(xValue: Float, totalValues: Int, lastDate: Date?): Date {
-            val diff: Int = totalValues - xValue.toInt()
-            val cal = Calendar.getInstance(Locale.US)
-            cal.time = lastDate
-            cal.add(Calendar.DATE, -diff)
-            return cal.time
-        }
-
         fun determineZoom(totalValues: Int, maxVisibleValues: Int): Float {
             val visiblePoints: Int = if (totalValues > maxVisibleValues) maxVisibleValues else totalValues
             return visiblePoints / 182F
         }
     }
-}
 
-class DayAxisValueFormatter(private val chart: LineChart, private val totalValues: Int, private val lastDate: Date?) : IAxisValueFormatter {
-    override fun getFormattedValue(value: Float, axis: AxisBase): String {
-        val range = chart.visibleXRange
-        val date = ChartUtility.determineDate(value, totalValues, lastDate)
-        return when {
-            range > 365 * 3 -> {
-                chart.xAxis.granularity = 92F
-                formatQuarter(date)
-            }
-            range > 30 * 6 -> {
-                chart.xAxis.granularity = 31F
-                formatMonth(date)
-            }
-            else -> {
-                chart.xAxis.granularity = 1F
-                formatDay(date)
+
+    class DayAxisValueFormatter(private val chart: LineChart, private val totalValues: Int, private val lastDate: Date?) : IAxisValueFormatter {
+        override fun getFormattedValue(value: Float, axis: AxisBase): String {
+            val range = chart.visibleXRange
+            val date = determineDate(value, totalValues, lastDate)
+            return when {
+                range > 365 * 3 -> {
+                    chart.xAxis.granularity = 92F
+                    formatQuarter(date)
+                }
+                range > 30 * 6 -> {
+                    chart.xAxis.granularity = 31F
+                    formatMonth(date)
+                }
+                else -> {
+                    chart.xAxis.granularity = 1F
+                    formatDay(date)
+                }
             }
         }
-    }
 
-    private fun formatQuarter(date: Date): String {
-        val cal = Calendar.getInstance(Locale.US)
-        cal.time = date
-        val quarter = cal.get(Calendar.MONTH) / 3 + 1
-        return "${SimpleDateFormat("yy", Locale.US).format(date)}/Q$quarter"
-    }
+        fun determineDate(xValue: Float, totalValues: Int, lastDate: Date?): Date {
+            val diff: Int = totalValues - xValue.toInt()
+            val cal = Calendar.getInstance(Locale.US)
+            lastDate?.let {
+                cal.time = lastDate
+            }
+            cal.add(Calendar.DATE, -diff)
+            return cal.time
+        }
 
-    private fun formatMonth(date: Date): String {
-        return SimpleDateFormat("yy/MM", Locale.US).format(date)
-    }
+        private fun formatQuarter(date: Date): String {
+            val cal = Calendar.getInstance(Locale.US)
+            cal.time = date
+            val quarter = cal.get(Calendar.MONTH) / 3 + 1
+            return "${SimpleDateFormat("yy", Locale.US).format(date)}/Q$quarter"
+        }
 
-    private fun formatDay(date: Date): String {
-        return SimpleDateFormat("MM/dd", Locale.US).format(date)
+        private fun formatMonth(date: Date): String {
+            return SimpleDateFormat("yy/MM", Locale.US).format(date)
+        }
+
+        private fun formatDay(date: Date): String {
+            return SimpleDateFormat("MM/dd", Locale.US).format(date)
+        }
     }
 }
-

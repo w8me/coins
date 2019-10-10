@@ -2,9 +2,6 @@ package com.iwelogic.coins.data
 
 import android.annotation.SuppressLint
 import com.google.gson.GsonBuilder
-import com.iwelogic.coins.DateDeserializer
-import com.iwelogic.coins.DoubleDeserializer
-import com.iwelogic.coins.IntDeserializer
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter

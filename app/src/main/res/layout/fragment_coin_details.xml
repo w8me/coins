@@ -4,18 +4,18 @@
 
     <data>
         <import type="android.view.View" />
-        <import type="com.iwelogic.coins.BindingUtility" />
+        <import type="com.iwelogic.coins.ui.details.BindingChart" />
         <import type="android.widget.CompoundButton" />
 
         <variable
             name="viewModelFrag"
-            type="com.iwelogic.coins.details.CoinDetailsViewModel" />
+            type="com.iwelogic.coins.ui.details.CoinDetailsViewModel" />
     </data>
 
     <FrameLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".details.CoinDetailsFragment"
+        tools:context=".ui.details.CoinDetailsFragment"
         android:id="@+id/main"
         android:background="@color/white"
         android:elevation="1dp">

@@ -15,8 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".edit.EditWidgetActivity"/>
-        <activity android:name=".MainActivity">
+        <activity android:name="com.iwelogic.coins.ui.edit.EditWidgetActivity"/>
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +25,7 @@
         </activity>
 
         <receiver
-            android:name=".widget.CoinWidget"
+            android:name="com.iwelogic.coins.ui.widget.CoinWidget"
             android:icon="@android:drawable/star_big_on"
             android:label="text">
             <intent-filter>
@@ -38,7 +38,7 @@
         </receiver>
 
         <service
-            android:name=".widget.WidgetService"
+            android:name="com.iwelogic.coins.ui.widget.WidgetService"
             android:process="com.iwelogic.coins.service"
             android:stopWithTask="false" />
     </application>

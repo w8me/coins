@@ -46,7 +46,7 @@ class Coin() : Parcelable {
     val ath: Double? = null
 
     @SerializedName("name")
-    val name: String? = null
+    val name: String = "bitcoin"
 
     @SerializedName("high_24h")
     val high24h: Double? = null
@@ -58,7 +58,7 @@ class Coin() : Parcelable {
     val marketCapChangePercentage24h: Double? = null
 
     @SerializedName("id")
-    val id: String? = null
+    val id: String = "bitcoin"
 
     @SerializedName("current_price")
     val currentPrice: Double? = null

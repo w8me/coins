@@ -2,6 +2,7 @@ package com.iwelogic.coins.data
 
 import android.database.Observable
 import com.iwelogic.coins.models.Coin
+import com.iwelogic.coins.models.CoinDetails
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.QueryMap
@@ -13,5 +14,5 @@ interface Api {
     suspend fun getCoins(@QueryMap queries: HashMap<String, Any>): MutableList<Coin>
 
     @GET("coins/{id}")
-    fun getDetails(@Path("id") id: String, @QueryMap queries: HashMap<String, Any>): Observable<Any>
+    suspend fun getDetails(@Path("id") id: String, @QueryMap queries: HashMap<String, Any>): CoinDetails
 }

@@ -1,9 +1,15 @@
 package com.iwelogic.coins.base
 
+import android.content.Context
 import android.graphics.Typeface
+import android.os.Build
+import android.text.Html
+import android.text.Spanned
 import android.text.TextUtils
+import android.text.method.LinkMovementMethod
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableList
@@ -23,6 +29,15 @@ import java.util.*
 
 class BindingAdapter {
     companion object {
+        @BindingAdapter("android:html_text")
+        @JvmStatic
+        fun convertHtml(view: TextView, html: String?) {
+            html?.let {
+                val spanned = Html.fromHtml(html.replace("\n", "<br>"))
+                view.text = spanned
+                view.setMovementMethod(LinkMovementMethod.getInstance())
+            }
+        }
 
         @BindingAdapter("android:src")
         @JvmStatic

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <import type="com.iwelogic.coins.base.BindingAdapter" />
 
         <variable
@@ -10,20 +11,37 @@
             type="com.iwelogic.coins.ui.details.CoinDetailsViewModel" />
     </data>
 
-    <FrameLayout xmlns:tools="http://schemas.android.com/tools"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.details.CoinDetailsFragment"
-        android:id="@+id/main"
-        android:background="@color/white"
-        android:elevation="1dp">
+        android:layout_height="wrap_content"
+        android:elevation="1dp"
+        android:background="@color/white">
 
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/coin_detail_chart"
+        <LinearLayout
+            android:id="@+id/main"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_margin="@dimen/quater_default_size"
-            app:chartData="@{viewModel.history}" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    </FrameLayout>
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/coin_detail_chart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_margin="@dimen/quater_default_size"
+                android:visibility="invisible"
+                app:chartData="@{viewModel.history}" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/half_default_size"
+                android:layout_marginStart="@dimen/default_size"
+                android:layout_marginEnd="@dimen/default_size"
+                android:textSize="16sp"
+                android:layout_marginBottom="@dimen/default_size"
+                android:html_text="@{viewModel.description}" />
+
+        </LinearLayout>
+
+    </ScrollView>
 </layout>

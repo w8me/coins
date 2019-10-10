@@ -3,12 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="android.view.View" />
-        <import type="com.iwelogic.coins.ui.details.BindingChart" />
-        <import type="android.widget.CompoundButton" />
+        <import type="com.iwelogic.coins.base.BindingAdapter" />
 
         <variable
-            name="viewModelFrag"
+            name="viewModel"
             type="com.iwelogic.coins.ui.details.CoinDetailsViewModel" />
     </data>
 
@@ -28,7 +26,7 @@
             android:layout_marginBottom="@dimen/default_size"
             android:layout_marginLeft="@dimen/default_size"
             android:layout_marginRight="@dimen/default_size"
-            app:chartData="@{viewModelFrag.history}" />
+            app:chartData="@{viewModel.history}" />
 
     </FrameLayout>
 </layout>

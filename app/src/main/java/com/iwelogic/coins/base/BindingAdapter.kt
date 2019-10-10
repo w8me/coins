@@ -1,10 +1,13 @@
-package com.iwelogic.coins.ui.details
+package com.iwelogic.coins.base
 
 import android.graphics.Typeface
+import android.text.TextUtils
 import android.view.View
+import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableList
+import com.bumptech.glide.Glide
 import com.cfin.cryptofin.entity.HistoryEntity
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.AxisBase
@@ -18,8 +21,16 @@ import com.iwelogic.coins.R
 import java.text.SimpleDateFormat
 import java.util.*
 
-class BindingChart {
+class BindingAdapter {
     companion object {
+
+        @BindingAdapter("android:src")
+        @JvmStatic
+        fun loadImage(imageView: ImageView, imageURL: String) {
+            Glide.with(imageView.context)
+                .load(if(!TextUtils.isEmpty(imageURL)) imageURL else R.drawable.logo)
+                .into(imageView)
+        }
 
         @BindingAdapter("chartData")
         @JvmStatic

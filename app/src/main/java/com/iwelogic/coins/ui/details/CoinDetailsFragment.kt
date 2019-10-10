@@ -19,10 +19,8 @@ class CoinDetailsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewModel = ViewModelProviders.of(this).get(CoinDetailsViewModel::class.java)
-
-        val binding: FragmentCoinDetailsBinding = DataBindingUtil.inflate<FragmentCoinDetailsBinding>(inflater, R.layout.fragment_coin_details, container, false).apply {
-            viewModelFrag = viewModel
-        }
+        val binding: FragmentCoinDetailsBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_coin_details, container, false)
+        binding.viewModel = viewModel
         return binding.root
     }
 

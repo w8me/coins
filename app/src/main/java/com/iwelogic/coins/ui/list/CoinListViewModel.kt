@@ -1,5 +1,7 @@
 package com.iwelogic.coins.ui.list
 
+import android.util.Log
+import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,7 +15,11 @@ class CoinListViewModel : ViewModel() {
         value = ArrayList()
     }
 
+    val refreshing: ObservableField<Boolean> = ObservableField()
+
     fun load() {
+        refreshing.set(true)
+        Log.w("myLog", " LOAD");
         viewModelScope.launch {
             runCatching {
                 val queries = HashMap<String, Any>()
@@ -21,8 +27,10 @@ class CoinListViewModel : ViewModel() {
                 queries["vs_currency"] = "usd"
                 val postsRequest = ApiModule.api.getCoins(queries)
                 mCoins.value = postsRequest
+                refreshing.set(false)
             }.onFailure {
                 it.printStackTrace()
+                refreshing.set(false)
             }
         }
     }

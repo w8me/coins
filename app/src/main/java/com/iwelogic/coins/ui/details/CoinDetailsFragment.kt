@@ -16,7 +16,6 @@ class CoinDetailsFragment : Fragment() {
 
     private lateinit var viewModel: CoinDetailsViewModel
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewModel = ViewModelProviders.of(this).get(CoinDetailsViewModel::class.java)
         val binding: FragmentCoinDetailsBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_coin_details, container, false)
@@ -28,7 +27,7 @@ class CoinDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val coin: Coin = CoinDetailsFragmentArgs.fromBundle(arguments!!).coin
-        coin.name?.let { (activity as MainActivity).updateTitle(it) }
+        (activity as MainActivity).updateTitle(coin.name)
         viewModel.coin = coin
         viewModel.load()
     }

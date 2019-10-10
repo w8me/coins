@@ -9,7 +9,7 @@
         <import type="android.widget.CompoundButton" />
 
         <variable
-            name="viewModelFrag"
+            name="viewModel"
             type="com.iwelogic.coins.ui.list.CoinListViewModel" />
     </data>
 
@@ -18,11 +18,19 @@
         android:layout_height="match_parent"
         tools:context=".ui.details.CoinDetailsFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            app:refreshing="@{viewModel.refreshing}"
+            app:onRefreshListener="@{() -> viewModel.load()}">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </FrameLayout>
 </layout>

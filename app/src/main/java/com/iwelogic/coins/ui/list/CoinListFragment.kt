@@ -18,25 +18,27 @@ import com.iwelogic.coins.R
 class CoinListFragment : Fragment() {
 
     private lateinit var viewModel: CoinListViewModel
-
+    var binding : FragmentCoinListBinding? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewModel = ViewModelProviders.of(this).get(CoinListViewModel::class.java)
-
-        val binding = DataBindingUtil.inflate<FragmentCoinListBinding>(inflater, R.layout.fragment_coin_list, container, false).apply {
-            viewModelFrag = viewModel
+        if(binding == null){
+            binding = DataBindingUtil.inflate(inflater, R.layout.fragment_coin_list, container, false)
+            binding!!.viewModel = viewModel
+            viewModel.load()
         }
-        return binding.root
+        return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        list.adapter = CoinAdapter(viewModel.mCoins)
-        (list.adapter as CoinAdapter).onItemClick = {
-            findNavController().navigate(CoinListFragmentDirections.coinDetails(it))
+        if(list.adapter == null){
+            list.adapter = CoinAdapter(viewModel.mCoins)
+            (list.adapter as CoinAdapter).onItemClick = {
+                findNavController().navigate(CoinListFragmentDirections.coinDetails(it))
+            }
+            viewModel.mCoins.observe(this, Observer<List<Coin>> { coins: List<Coin> ->
+                (list.adapter as CoinAdapter).notifyDataSetChanged()
+            })
         }
-        viewModel.mCoins.observe(this, Observer<List<Coin>> { coins: List<Coin> ->
-            (list.adapter as CoinAdapter).notifyDataSetChanged()
-        })
-        viewModel.load()
     }
 }

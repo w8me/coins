@@ -10,5 +10,5 @@
     <dimen name="chart_grid_width">1dp</dimen>
     <dimen name="chart_highlight_width">1dp</dimen>
     <dimen name="chart_marker_padding">2dp</dimen>
-    <dimen name="chart_text_size">10sp</dimen>
+    <dimen name="chart_text_size">12sp</dimen>
 </resources>

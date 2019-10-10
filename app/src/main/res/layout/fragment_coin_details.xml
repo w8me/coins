@@ -22,10 +22,7 @@
             android:id="@+id/coin_detail_chart"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_marginTop="@dimen/default_size"
-            android:layout_marginBottom="@dimen/default_size"
-            android:layout_marginLeft="@dimen/default_size"
-            android:layout_marginRight="@dimen/default_size"
+            android:layout_margin="@dimen/quater_default_size"
             app:chartData="@{viewModel.history}" />
 
     </FrameLayout>

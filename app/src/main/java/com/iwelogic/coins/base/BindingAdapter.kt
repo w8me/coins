@@ -57,12 +57,11 @@ class BindingAdapter {
             val textSize: Float = DimensionUtility.px2dp(context, context.resources.getDimension(R.dimen.chart_text_size))
 
             // colors
-            val lineColor: Int = ContextCompat.getColor(context, R.color.chart_line)
-            val axisColor: Int = ContextCompat.getColor(context, R.color.chart_axis)
-            val gridColor: Int = ContextCompat.getColor(context, R.color.chart_grid)
-            val highlightColor: Int = ContextCompat.getColor(context, R.color.chart_highlight)
-            val fillColor: Int = ContextCompat.getColor(context, R.color.chart_fill)
-            val textColor: Int = ContextCompat.getColor(context, R.color.chart_text)
+            val lineColor: Int = ContextCompat.getColor(context, R.color.colorPrimary)
+            val axisColor: Int = ContextCompat.getColor(context, R.color.black)
+            val highlightColor: Int = ContextCompat.getColor(context, R.color.black)
+            val fillColor: Int = ContextCompat.getColor(context, R.color.colorPrimary)
+            val textColor: Int = ContextCompat.getColor(context, R.color.black)
 
             // data
             val entries = ArrayList<Entry>()
@@ -90,8 +89,7 @@ class BindingAdapter {
             xAxis.labelRotationAngle = -45F
             xAxis.axisLineWidth = axisWidth
             xAxis.axisLineColor = axisColor
-            xAxis.gridLineWidth = gridWidth
-            xAxis.gridColor = gridColor
+
             xAxis.textSize = textSize
             xAxis.textColor = textColor
             xAxis.typeface = Typeface.SANS_SERIF
@@ -104,8 +102,6 @@ class BindingAdapter {
             val yAxis = lineChart.axisLeft
             yAxis.axisLineWidth = axisWidth
             yAxis.axisLineColor = axisColor
-            yAxis.gridLineWidth = gridWidth
-            yAxis.gridColor = gridColor
             yAxis.textSize = textSize
             yAxis.textColor = textColor
             yAxis.typeface = Typeface.SANS_SERIF

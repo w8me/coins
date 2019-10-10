@@ -12,6 +12,8 @@ import android.net.Uri
 import android.os.Build
 import android.os.IBinder
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.bumptech.glide.Glide
@@ -24,7 +26,7 @@ import com.iwelogic.coins.models.WidgetConfig
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.util.HashMap
+import java.util.*
 
 class WidgetService : Service() {
     private val mCompositeDisposable = CompositeDisposable()
@@ -93,13 +95,15 @@ class WidgetService : Service() {
         val widgetConfig = DataBase.getInstance().readObject("widgetConfig$widgetId", WidgetConfig::class.java)
         remoteView.setInt(R.id.background, "setAlpha", widgetConfig.backgroundAlpha)
         remoteView.setInt(R.id.background, "setColorFilter", widgetConfig.backgroundRgb)
-        remoteView.setTextViewText(R.id.price, "${coins[0].currentPrice}")
-        remoteView.setTextViewText(R.id.name, coins[0].name)
-        remoteView.setViewVisibility(R.id.progressBar, View.GONE)
+        remoteView.setTextColor(R.id.name,  widgetConfig.textColor)
+        remoteView.setTextColor(R.id.price,  widgetConfig.textColor)
+        remoteView.setTextViewText(R.id.price, String.format(resources.getString(R.string.price), coins[coins.indexOf(widgetConfig.coin)].currentPrice))
+        remoteView.setTextViewText(R.id.name, widgetConfig.coin.symbol!!.toUpperCase(Locale.getDefault()))
+        remoteView.setViewVisibility(R.id.progressBar, GONE)
 
         val icon = Glide.with(this@WidgetService.baseContext)
             .asBitmap()
-            .load(coins[0].image)
+            .load(widgetConfig.coin.image)
             .submit(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
             .get()
         remoteView.setImageViewBitmap(R.id.icon, icon)
@@ -115,7 +119,7 @@ class WidgetService : Service() {
 
     private fun showProgress(status: Boolean, widgetId: Int) {
         val remoteView = RemoteViews(this.applicationContext.packageName, R.layout.widget_coin)
-        remoteView.setViewVisibility(R.id.progressBar, View.VISIBLE)
+        remoteView.setViewVisibility(R.id.progressBar, if(status) VISIBLE else GONE)
         AppWidgetManager.getInstance(this).partiallyUpdateAppWidget(widgetId, remoteView)
     }
 }

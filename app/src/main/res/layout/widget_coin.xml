@@ -19,18 +19,18 @@
 
         <ImageView
             android:id="@+id/icon"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="match_parent"
-            android:padding="8dp"
-            android:scaleType="fitCenter"/>
+            android:scaleType="centerInside"/>
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center_vertical"
+            android:minWidth="50dp"
             android:maxLines="1"
+            android:textStyle="bold"
             android:textSize="30sp" />
 
         <TextView
@@ -40,7 +40,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:maxLines="1"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:layout_marginEnd="@dimen/half_default_size"/>
     </LinearLayout>
 
     <ProgressBar

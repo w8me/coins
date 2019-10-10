@@ -2,11 +2,13 @@ package com.iwelogic.coins.models
 
 import android.os.Parcel
 import android.os.Parcelable
+import android.text.TextUtils
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.gson.annotations.SerializedName
+import com.iwelogic.coins.R
 
 class Coin() : Parcelable {
 
@@ -17,7 +19,7 @@ class Coin() : Parcelable {
     val symbol: String? = null
 
     @SerializedName("image")
-    val image: String? = null
+    val image: String = ""
 
     @SerializedName("circulating_supply")
     val circulatingSupply: Double? = null
@@ -85,7 +87,7 @@ class Coin() : Parcelable {
                     RequestOptions()
                         .circleCrop()
                 )
-                .load(imageURL)
+                .load(if(!TextUtils.isEmpty(imageURL)) imageURL else R.drawable.logo)
                 .into(imageView)
         }
     }
@@ -96,6 +98,21 @@ class Coin() : Parcelable {
 
     override fun describeContents(): Int {
         return 0
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Coin
+
+        if (symbol != other.symbol) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return symbol?.hashCode() ?: 0
     }
 
     companion object CREATOR : Parcelable.Creator<Coin> {

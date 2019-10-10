@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProviders
 import com.iwelogic.coins.R
 import androidx.databinding.DataBindingUtil
@@ -57,7 +58,7 @@ class EditWidgetActivity : AppCompatActivity() {
                 .with(this@EditWidgetActivity)
                 .setTitle("Choose color")
                 .initialColor(Color.BLUE)
-                .wheelType(ColorPickerView.WHEEL_TYPE.FLOWER)
+                .wheelType(ColorPickerView.WHEEL_TYPE.CIRCLE)
                 .density(12)
                 .setPositiveButton("ok") { _, selectedColor, allColors ->
                     viewModel.setBackgroundColor(selectedColor, Color.alpha(selectedColor), Color.rgb(Color.red(selectedColor), Color.green(selectedColor), Color.blue(selectedColor)))
@@ -66,6 +67,23 @@ class EditWidgetActivity : AppCompatActivity() {
                 .show()
         }
 
+        textColor.setOnClickListener {
+            ColorPickerDialogBuilder
+                .with(this@EditWidgetActivity)
+                .setTitle("Choose color")
+                .initialColor(Color.BLUE)
+                .lightnessSliderOnly()
+                .wheelType(ColorPickerView.WHEEL_TYPE.CIRCLE)
+                .density(12)
+                .setPositiveButton("ok") { _, selectedColor, allColors ->
+                    Log.w("myLog", " "  + selectedColor);
+                    viewModel.setTextColor(selectedColor)
+                }
+                .build()
+                .show()
+        }
+
         viewModel.widgetId = mWidgetId
+        viewModel.load()
     }
 }

@@ -12,20 +12,19 @@
             type="com.iwelogic.coins.edit.EditWidgetViewModel" />
     </data>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <FrameLayout
                 android:id="@+id/main"
                 android:layout_width="match_parent"
                 android:layout_height="126dp"
-                android:padding="16dp">
+                android:padding="16dp"
+                android:background="@drawable/background">
 
                 <ImageView
                     android:id="@+id/background"
@@ -44,19 +43,20 @@
                         android:id="@+id/icon"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:padding="8dp"
-                        android:src="@drawable/logo"
+                        android:src="@{viewModel.config.coin.image}"
                         android:scaleType="fitCenter"/>
 
                     <TextView
                         android:id="@+id/name"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
+                        android:gravity="center_vertical"
                         android:maxLines="1"
-                        android:text="BIT"
-                        android:textSize="30sp" />
+                        android:minWidth="50dp"
+                        android:textStyle="bold"
+                        android:textColor="@{viewModel.config.textColor}"
+                        android:text="@{viewModel.config.coin.symbol.toUpperCase()}"
+                        android:textSize="26sp" />
 
                     <TextView
                         android:id="@+id/price"
@@ -65,10 +65,41 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:maxLines="1"
-                        android:text="9999"
-                        android:textSize="30sp" />
+                        android:textColor="@{viewModel.config.textColor}"
+                        android:text="@{String.format(@string/price, viewModel.config.coin.currentPrice)}"
+                        android:textSize="26sp" />
                 </LinearLayout>
             </FrameLayout>
+
+
+            <LinearLayout
+                android:id="@+id/currency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center_vertical"
+                    android:textColor="#000"
+                    android:text="Currency"
+                    android:textSize="20sp" />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center_vertical|end"
+                    android:text="@{viewModel.config.coin.name}"
+                    android:textSize="20sp"
+                    android:layout_marginEnd="16dp"/>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/panelColor"
@@ -76,23 +107,52 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="50dp"
-                android:layout_marginStart="16dp"
-                android:gravity="center_vertical"
-                android:textColor="@{viewModel.config.background}"
-                android:text="@string/background_color"
-                android:textSize="20sp" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center_vertical"
+                    android:textColor="#000"
+                    android:text="@string/background_color"
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
                     android:background="@{viewModel.config.background}"
-                    android:layout_marginEnd="@dimen/default_padding_side"/>
+                    android:layout_marginEnd="@dimen/default_size"/>
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/textColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center_vertical"
+                    android:textColor="#000"
+                    android:text="TextColor"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@{viewModel.config.textColor}"
+                    android:layout_marginEnd="@dimen/default_size"/>
+            </LinearLayout>
+
+            <Space
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
 
             <TextView
                 android:id="@+id/save"
@@ -101,7 +161,7 @@
                 android:gravity="center"
                 android:text="@string/save"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/default_size"/>
         </LinearLayout>
-    </ScrollView>
 </layout>

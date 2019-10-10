@@ -3,7 +3,7 @@
     <string name="coin_details">Coin details</string>
     <string name="global_arrow_up">&#x25B2; %1$.2f</string>
     <string name="global_arrow_down">&#x25BC;  %1$.2f</string>
-    <string name="price">$  %1$.4f</string>
+    <string name="price">$%1$.4f</string >
     <string name="select_background_color">Select Background Color:</string>
     <string name="background_color">Background Color</string>
     <string name="save">SAVE</string>

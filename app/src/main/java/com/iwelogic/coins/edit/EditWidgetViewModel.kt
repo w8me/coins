@@ -1,9 +1,13 @@
 package com.iwelogic.coins.edit
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.iwelogic.coins.data.ApiModule
 import com.iwelogic.coins.data.DataBase
 import com.iwelogic.coins.models.WidgetConfig
+import kotlinx.coroutines.launch
 
 class EditWidgetViewModel : ViewModel() {
 
@@ -22,5 +26,26 @@ class EditWidgetViewModel : ViewModel() {
 
     fun clickSave(){
         DataBase.getInstance().writeObject("widgetConfig$widgetId", config.value!!)
+    }
+
+    fun load() {
+        viewModelScope.launch {
+            runCatching {
+                val queries = HashMap<String, Any>()
+                queries["order"] = "market_cap_desc"
+                queries["vs_currency"] = "usd"
+                val coins = ApiModule.api.getCoins(queries)
+                config.value!!.coin = coins[1]
+                Log.w("myLog", " " + coins[1].currentPrice);
+                config.postValue(config.value)
+            }.onFailure {
+                it.printStackTrace()
+            }
+        }
+    }
+
+    fun setTextColor(selectedColor: Int) {
+        config.value?.textColor = selectedColor;
+        config.postValue(config.value)
     }
 }

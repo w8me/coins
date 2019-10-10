@@ -2,13 +2,7 @@ package com.iwelogic.coins.models
 
 import android.os.Parcel
 import android.os.Parcelable
-import android.text.TextUtils
-import android.widget.ImageView
-import androidx.databinding.BindingAdapter
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.google.gson.annotations.SerializedName
-import com.iwelogic.coins.R
 
 class Coin() : Parcelable {
 

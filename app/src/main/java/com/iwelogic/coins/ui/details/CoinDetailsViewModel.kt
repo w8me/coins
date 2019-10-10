@@ -1,6 +1,5 @@
 package com.iwelogic.coins.ui.details
 
-import android.util.Log
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableList
 import androidx.lifecycle.ViewModel
@@ -28,7 +27,6 @@ class CoinDetailsViewModel : ViewModel() {
                 val postsRequest = ApiModule.apiHistory.getHistory(queries)
                 history.clear()
                 history.addAll(postsRequest.data!!)
-                Log.w("myLog", "HISTORY " + history.size);
             }.onFailure {
                 it.printStackTrace()
             }

@@ -54,7 +54,7 @@ class EditWidgetViewModel : ViewModel() {
     }
 
     fun setTextColor(selectedColor: Int) {
-        config.value?.textColor = selectedColor;
+        config.value?.textColor = selectedColor
         config.postValue(config.value)
     }
 }

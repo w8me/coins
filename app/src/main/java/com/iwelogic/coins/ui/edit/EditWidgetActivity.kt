@@ -6,7 +6,6 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.ViewModelProviders
 import com.iwelogic.coins.R
 import androidx.databinding.DataBindingUtil
@@ -76,7 +75,6 @@ class EditWidgetActivity : AppCompatActivity() {
                 .wheelType(ColorPickerView.WHEEL_TYPE.CIRCLE)
                 .density(12)
                 .setPositiveButton("ok") { _, selectedColor, allColors ->
-                    Log.w("myLog", " "  + selectedColor);
                     viewModel.setTextColor(selectedColor)
                 }
                 .build()

@@ -8,4 +8,11 @@
     <color name="green">#13D627</color>
     <color name="black">#000000</color>
 
+    <color name="chart_line">#000000</color>
+    <color name="chart_axis">#000000</color>
+    <color name="chart_grid">#000000</color>
+    <color name="chart_highlight">#000000</color>
+    <color name="chart_fill">#000000</color>
+    <color name="chart_text">#000000</color>
+
 </resources>

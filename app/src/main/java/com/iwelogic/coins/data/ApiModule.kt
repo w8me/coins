@@ -2,12 +2,16 @@ package com.iwelogic.coins.data
 
 import android.annotation.SuppressLint
 import com.google.gson.GsonBuilder
+import com.iwelogic.coins.DateDeserializer
+import com.iwelogic.coins.DoubleDeserializer
+import com.iwelogic.coins.IntDeserializer
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
@@ -47,6 +51,9 @@ class ApiModule {
         private fun provideConverterFactory(): Converter.Factory {
             return GsonConverterFactory.create(
                 GsonBuilder()
+                    .registerTypeAdapter(Int::class.java, IntDeserializer())
+                    .registerTypeAdapter(Double::class.java, DoubleDeserializer())
+                    .registerTypeAdapter(Date::class.java, DateDeserializer())
                     .setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
                     .serializeNulls()
                     .create()

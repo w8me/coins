@@ -57,7 +57,7 @@ class EditWidgetActivity : AppCompatActivity() {
             ColorPickerDialogBuilder
                 .with(this@EditWidgetActivity)
                 .setTitle("Choose color")
-                .initialColor(Color.BLUE)
+                .initialColor(viewModel.config.value!!.background)
                 .wheelType(ColorPickerView.WHEEL_TYPE.CIRCLE)
                 .density(12)
                 .setPositiveButton("ok") { _, selectedColor, allColors ->
@@ -71,7 +71,7 @@ class EditWidgetActivity : AppCompatActivity() {
             ColorPickerDialogBuilder
                 .with(this@EditWidgetActivity)
                 .setTitle("Choose color")
-                .initialColor(Color.BLUE)
+                .initialColor(viewModel.config.value!!.textColor)
                 .lightnessSliderOnly()
                 .wheelType(ColorPickerView.WHEEL_TYPE.CIRCLE)
                 .density(12)

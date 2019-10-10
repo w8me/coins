@@ -87,4 +87,6 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:$glide"
 
     implementation 'com.github.QuadFlask:colorpicker:0.0.13'
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 }

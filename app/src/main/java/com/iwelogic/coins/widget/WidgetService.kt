@@ -11,7 +11,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.IBinder
-import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.RemoteViews
@@ -100,7 +99,6 @@ class WidgetService : Service() {
         remoteView.setTextViewText(R.id.price, String.format(resources.getString(R.string.price), coins[coins.indexOf(widgetConfig.coin)].currentPrice))
         remoteView.setTextViewText(R.id.name, widgetConfig.coin.symbol!!.toUpperCase(Locale.getDefault()))
         remoteView.setViewVisibility(R.id.progressBar, GONE)
-
         val icon = Glide.with(this@WidgetService.baseContext)
             .asBitmap()
             .load(widgetConfig.coin.image)

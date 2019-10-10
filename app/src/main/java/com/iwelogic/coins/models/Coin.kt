@@ -83,10 +83,6 @@ class Coin() : Parcelable {
         @JvmStatic
         fun loadImage(imageView: ImageView, imageURL: String) {
             Glide.with(imageView.context)
-                .setDefaultRequestOptions(
-                    RequestOptions()
-                        .circleCrop()
-                )
                 .load(if(!TextUtils.isEmpty(imageURL)) imageURL else R.drawable.logo)
                 .into(imageView)
         }
@@ -123,5 +119,9 @@ class Coin() : Parcelable {
         override fun newArray(size: Int): Array<Coin?> {
             return arrayOfNulls(size)
         }
+    }
+
+    override fun toString(): String {
+        return name!!
     }
 }

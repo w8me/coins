@@ -1,11 +1,11 @@
 package com.iwelogic.coins.edit
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.iwelogic.coins.data.ApiModule
 import com.iwelogic.coins.data.DataBase
+import com.iwelogic.coins.models.Coin
 import com.iwelogic.coins.models.WidgetConfig
 import kotlinx.coroutines.launch
 
@@ -15,6 +15,10 @@ class EditWidgetViewModel : ViewModel() {
 
     val config = MutableLiveData<WidgetConfig>().apply {
         value =  WidgetConfig()
+    }
+
+    val mCoins = MutableLiveData<MutableList<Coin>>().apply {
+        value = ArrayList()
     }
 
     fun setBackgroundColor(color : Int,  alpha: Int, rgb: Int) {
@@ -35,13 +39,18 @@ class EditWidgetViewModel : ViewModel() {
                 queries["order"] = "market_cap_desc"
                 queries["vs_currency"] = "usd"
                 val coins = ApiModule.api.getCoins(queries)
-                config.value!!.coin = coins[1]
-                Log.w("myLog", " " + coins[1].currentPrice);
+                config.value!!.coin = coins[0]
                 config.postValue(config.value)
+                mCoins.value = coins
             }.onFailure {
                 it.printStackTrace()
             }
         }
+    }
+
+    fun onSelectItem(pos : Int){
+        config.value!!.coin = mCoins.value!![pos]
+        config.postValue(config.value)
     }
 
     fun setTextColor(selectedColor: Int) {

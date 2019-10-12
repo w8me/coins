@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.iwelogic.coins.ui.edit.EditWidgetViewModel" />
+            type="com.iwelogic.crypto_coins.ui.edit.EditWidgetViewModel" />
     </data>
 
 

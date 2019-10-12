@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.iwelogic.coins.ui.list.CoinListViewModel" />
+            type="com.iwelogic.crypto_coins.ui.list.CoinListViewModel" />
     </data>
 
     <FrameLayout xmlns:tools="http://schemas.android.com/tools"

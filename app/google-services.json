@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "714745907766",
+    "firebase_url": "https://iwelogic-crypto-coin.firebaseio.com",
+    "project_id": "iwelogic-crypto-coin",
+    "storage_bucket": "iwelogic-crypto-coin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714745907766:android:bbfd06f1157a7bc774a697",
+        "android_client_info": {
+          "package_name": "com.iwelogic.crypto_coins"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "714745907766-44lnfbn20746ig9f726fkr924oko5tp7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzY8DvVS1QWNjvQdhchdNb8jKbgaaILrw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "714745907766-44lnfbn20746ig9f726fkr924oko5tp7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

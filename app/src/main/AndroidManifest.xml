@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.iwelogic.coins">
+    package="com.iwelogic.crypto_coins">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
 
     <application
-        android:name=".App"
+        android:name="com.iwelogic.crypto_coins.App"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name="com.iwelogic.coins.ui.edit.EditWidgetActivity"/>
-        <activity android:name=".ui.MainActivity">
+        <activity android:name="com.iwelogic.crypto_coins.ui.edit.EditWidgetActivity"/>
+        <activity android:name="com.iwelogic.crypto_coins.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +25,7 @@
         </activity>
 
         <receiver
-            android:name="com.iwelogic.coins.ui.widget.CoinWidget"
+            android:name="com.iwelogic.crypto_coins.ui.widget.CoinWidget"
             android:icon="@drawable/widget"
             android:label="Widget">
             <intent-filter>
@@ -38,9 +38,13 @@
         </receiver>
 
         <service
-            android:name="com.iwelogic.coins.ui.widget.WidgetService"
-            android:process="com.iwelogic.coins.service"
+            android:name="com.iwelogic.crypto_coins.ui.widget.WidgetService"
+            android:process="com.iwelogic.crypto_coins.service"
             android:stopWithTask="false" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/ad_id"/>
     </application>
 
 </manifest>

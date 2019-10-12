@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/coinsListFragment"
-        android:name="com.iwelogic.coins.ui.list.CoinListFragment"
+        android:name="com.iwelogic.crypto_coins.ui.list.CoinListFragment"
         android:label="Coins"
         tools:layout="@layout/fragment_coin_list" >
 
@@ -26,12 +26,12 @@
 
     <fragment
         android:id="@+id/coinDetailsFragment"
-        android:name="com.iwelogic.coins.ui.details.CoinDetailsFragment"
+        android:name="com.iwelogic.crypto_coins.ui.details.CoinDetailsFragment"
         android:label="Details"
         tools:layout="@layout/fragment_coin_details" >
         <argument
             android:name="coin"
-            app:argType="com.iwelogic.coins.models.Coin" />
+            app:argType="com.iwelogic.crypto_coins.models.Coin" />
     </fragment>
 
 </navigation>

@@ -4,11 +4,11 @@
 
     <data>
 
-        <import type="com.iwelogic.coins.base.BindingAdapter" />
+        <import type="com.iwelogic.crypto_coins.base.BindingAdapter" />
 
         <variable
             name="viewModel"
-            type="com.iwelogic.coins.ui.details.CoinDetailsViewModel" />
+            type="com.iwelogic.crypto_coins.ui.details.CoinDetailsViewModel" />
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

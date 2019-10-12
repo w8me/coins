@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -17,61 +16,69 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <FrameLayout
             android:id="@+id/main"
             android:layout_width="match_parent"
-            android:layout_height="126dp"
-            android:background="@drawable/background"
-            android:padding="16dp">
+            android:layout_height="176dp"
+            android:background="@drawable/background_widget_edit">
 
-            <ImageView
-                android:id="@+id/background"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:alpha="@{viewModel.config.backgroundAlpha}"
-                android:src="@drawable/background_widget"
-                android:tint="@{viewModel.config.backgroundRgb}" />
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/default_size"
+                android:layout_marginStart="@dimen/default_size">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/icon"
-                    android:layout_width="80dp"
+                    android:id="@+id/background"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerInside"
-                    android:padding="@dimen/quater_default_size"
-                    android:src="@{viewModel.config.coin.image}" />
+                    android:alpha="@{viewModel.config.backgroundAlpha}"
+                    android:src="@drawable/background_widget"
+                    android:tint="@{viewModel.config.backgroundRgb}" />
 
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:maxLines="1"
-                    android:minWidth="50dp"
-                    android:text="@{viewModel.config.coin.symbol.toUpperCase()}"
-                    android:textColor="@{viewModel.config.textColor}"
-                    android:textSize="26sp"
-                    android:textStyle="bold" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/price"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:text="@{String.format(@string/price, viewModel.config.coin.currentPrice)}"
-                    android:textColor="@{viewModel.config.textColor}"
-                    android:textSize="26sp" />
-            </LinearLayout>
+                    <ImageView
+                        android:id="@+id/icon"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/quater_default_size"
+                        android:scaleType="centerInside"
+                        android:src="@{viewModel.config.coin.image}" />
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:minWidth="50dp"
+                        android:text="@{viewModel.config.coin.symbol.toUpperCase()}"
+                        android:textColor="@{viewModel.config.textColor}"
+                        android:textSize="26sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/price"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="@{String.format(@string/price, viewModel.config.coin.currentPrice)}"
+                        android:textColor="@{viewModel.config.textColor}"
+                        android:textSize="26sp" />
+                </LinearLayout>
+            </FrameLayout>
         </FrameLayout>
-
 
         <LinearLayout
             android:id="@+id/currency"
@@ -85,7 +92,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="Currency"
+                android:text="@string/currency"
                 android:textColor="#000"
                 android:textSize="20sp" />
 
@@ -93,14 +100,14 @@
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/typeSpinner"
                 android:layout_width="0dp"
-                android:theme="@style/Spinner"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:entries="@{viewModel.mCoins}"
                 android:layout_gravity="center_vertical"
-                android:onItemSelected="@{(parent,view,pos,id)->viewModel.onSelectItem(pos)}"
                 android:layout_marginEnd="@dimen/default_size"
-                android:spinnerMode="dialog"/>
+                android:layout_weight="1"
+                android:entries="@{viewModel.mCoins}"
+                android:onItemSelected="@{(parent,view,pos,id)->viewModel.onSelectItem(pos)}"
+                android:spinnerMode="dialog"
+                android:theme="@style/Spinner" />
 
 
         </LinearLayout>
@@ -141,7 +148,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="Text Color"
+                android:text="@string/text_color"
                 android:textColor="#000"
                 android:textSize="20sp" />
 
@@ -164,7 +171,8 @@
             android:layout_height="50dp"
             android:layout_marginBottom="@dimen/default_size"
             android:gravity="center"
-            android:text="@string/save"
+            android:text="@string/create"
+            android:textColor="@color/colorPrimary"
             android:textSize="24sp"
             android:textStyle="bold" />
     </LinearLayout>

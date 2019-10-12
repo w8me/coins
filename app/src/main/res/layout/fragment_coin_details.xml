@@ -45,6 +45,7 @@
                     android:layout_marginEnd="@dimen/default_size"
                     android:layout_marginBottom="@dimen/default_size"
                     android:html_text="@{viewModel.description}"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
             </LinearLayout>

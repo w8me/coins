@@ -26,8 +26,8 @@
 
         <receiver
             android:name="com.iwelogic.coins.ui.widget.CoinWidget"
-            android:icon="@android:drawable/star_big_on"
-            android:label="text">
+            android:icon="@drawable/widget"
+            android:label="Widget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

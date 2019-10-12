@@ -8,5 +8,8 @@
     <string name="background_color">Background Color</string>
     <string name="save">SAVE</string>
     <string name="logo">logo</string>
+    <string name="create">Create</string>
+    <string name="text_color">Text Color</string>
+    <string name="currency">Currency</string>
 
 </resources>

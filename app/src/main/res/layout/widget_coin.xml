@@ -41,7 +41,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:maxLines="1"
-            android:textSize="30sp"
+            android:textSize="28sp"
             android:layout_marginEnd="@dimen/half_default_size"/>
     </LinearLayout>
 

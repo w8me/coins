@@ -12,16 +12,19 @@ import com.iwelogic.crypto_coins.databinding.ItemAdBinding
 import com.iwelogic.crypto_coins.databinding.ItemCoinBinding
 import com.iwelogic.crypto_coins.models.Coin
 import kotlinx.android.synthetic.main.item_ad.view.*
+import com.google.android.gms.ads.AdListener
+
+
 
 class CoinAdapter(items: MutableLiveData<MutableList<Coin>>) : BaseRecyclerAdapter<Coin>(items) {
 
     var onItemClick: ((Coin) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if(viewType == 1){
-            return CoinHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_coin, parent, false))
+        return if(viewType == 1){
+            CoinHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_coin, parent, false))
         } else {
-            return AdHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_ad, parent, false))
+            AdHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_ad, parent, false))
         }
     }
 
@@ -45,7 +48,21 @@ class CoinAdapter(items: MutableLiveData<MutableList<Coin>>) : BaseRecyclerAdapt
 
     internal inner class AdHolder(private val binding: ItemAdBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind() {
-            binding.root.adView.loadAd(AdRequest.Builder().addTestDevice("B6D402A58A4DC72BD8A2E0CB2F401652").build())
+            val adView = binding.root.adView
+            if(adView.tag == null || adView.tag !is Boolean || !(adView.tag as Boolean)){
+                adView.adListener = object : AdListener() {
+                    override fun onAdLoaded() {
+                        super.onAdLoaded()
+                        adView.tag = true
+                    }
+
+                    override fun onAdFailedToLoad(i: Int) {
+                        super.onAdFailedToLoad(i)
+                        adView.tag = false
+                    }
+                }
+                adView.loadAd(AdRequest.Builder().build())
+            }
         }
     }
 

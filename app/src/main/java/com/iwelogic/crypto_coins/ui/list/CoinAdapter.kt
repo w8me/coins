@@ -1,12 +1,10 @@
 package com.iwelogic.crypto_coins.ui.list
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.iwelogic.crypto_coins.R
 import com.iwelogic.crypto_coins.base.BaseRecyclerAdapter
@@ -31,7 +29,7 @@ class CoinAdapter(items: MutableLiveData<MutableList<Coin>>) : BaseRecyclerAdapt
         if(holder is CoinHolder){
             holder.bind(getItem(position))
         } else {
-            (holder as AdHolder).bind(getItem(position))
+            (holder as AdHolder).bind()
         }
     }
 
@@ -46,18 +44,8 @@ class CoinAdapter(items: MutableLiveData<MutableList<Coin>>) : BaseRecyclerAdapt
     }
 
     internal inner class AdHolder(private val binding: ItemAdBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(coin: Coin) {
-            binding.root.adView.adListener = object : AdListener() {
-                override fun onAdLoaded() {
-                    super.onAdLoaded()
-                }
-
-                override fun onAdFailedToLoad(p0: Int) {
-                    super.onAdFailedToLoad(p0)
-                    Log.w("myLog", " " + p0);
-                }
-            }
-            binding.root.adView.loadAd(AdRequest.Builder().build())
+        fun bind() {
+            binding.root.adView.loadAd(AdRequest.Builder().addTestDevice("B6D402A58A4DC72BD8A2E0CB2F401652").build())
         }
     }
 

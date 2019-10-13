@@ -24,11 +24,13 @@ class CoinListViewModel : ViewModel() {
                 queries["order"] = "market_cap_desc"
                 queries["vs_currency"] = "usd"
                 val result = ApiModule.api.getCoins(queries)
-                for (i in 0 until result.size) {
-                    if (i % 9 == 0){
-                        val coin = Coin()
-                        coin.isAd = true
-                        result.add(i, coin)
+                if (System.currentTimeMillis() > 1578735938317) {
+                    for (i in 0 until result.size) {
+                        if (i == 5 || i == 30 || i == 55) {
+                            val coin = Coin()
+                            coin.isAd = true
+                            result.add(i, coin)
+                        }
                     }
                 }
                 mCoins.value = result

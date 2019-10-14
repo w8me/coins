@@ -14,8 +14,6 @@ import com.iwelogic.crypto_coins.models.Coin
 import kotlinx.android.synthetic.main.item_ad.view.*
 import com.google.android.gms.ads.AdListener
 
-
-
 class CoinAdapter(items: MutableLiveData<MutableList<Coin>>) : BaseRecyclerAdapter<Coin>(items) {
 
     var onItemClick: ((Coin) -> Unit)? = null

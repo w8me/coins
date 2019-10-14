@@ -5,8 +5,6 @@ import androidx.recyclerview.widget.RecyclerView
 
 abstract class BaseRecyclerAdapter<T>(private val items: MutableLiveData<MutableList<T>>) :  RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    protected val TAG = "myLog"
-
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }

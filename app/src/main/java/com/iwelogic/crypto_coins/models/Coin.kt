@@ -93,7 +93,7 @@ class Coin() : Parcelable {
 
 
     override fun toString(): String {
-        return name!!
+        return name
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

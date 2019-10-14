@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "714745907766-3dnvcsr4kajvnc3koqvg32vgc7lcimho.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iwelogic.crypto_coins",
+            "certificate_hash": "e805aec78bdb319f3379b942010848cc238dfce2"
+          }
+        },
+        {
           "client_id": "714745907766-44lnfbn20746ig9f726fkr924oko5tp7.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -33,7 +41,8 @@
             }
           ]
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-8483070711143803~6303155918"
     }
   ],
   "configuration_version": "1"

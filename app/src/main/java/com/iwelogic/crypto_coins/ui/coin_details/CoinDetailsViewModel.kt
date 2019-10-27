@@ -1,4 +1,4 @@
-package com.iwelogic.crypto_coins.ui.details
+package com.iwelogic.crypto_coins.ui.coin_details
 
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableField
@@ -32,7 +32,6 @@ class CoinDetailsViewModel : ViewModel() {
                  queries["fsym"] = coin.symbol!!.toUpperCase(Locale.getDefault())
                  queries["aggregate"] = 1
                  val postsRequest = ApiModule.apiHistory.getHistory(queries)
-
 
                  val queriesDetails = HashMap<String, Any>()
                  queriesDetails["localization"] = false

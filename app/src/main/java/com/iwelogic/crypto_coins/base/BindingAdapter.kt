@@ -1,15 +1,22 @@
 package com.iwelogic.crypto_coins.base
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Typeface
+import android.net.Uri
 import android.text.Html
 import android.text.TextUtils
-import android.text.method.LinkMovementMethod
+import android.text.format.DateUtils
 import android.view.View
+import android.webkit.CookieManager
+import android.webkit.WebChromeClient
+import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableList
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.cfin.cryptofin.entity.HistoryEntity
 import com.github.mikephil.charting.charts.LineChart
@@ -19,10 +26,15 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
-import com.iwelogic.crypto_coins.utils.DimensionUtility
 import com.iwelogic.crypto_coins.R
+import com.iwelogic.crypto_coins.models.Coin
+import com.iwelogic.crypto_coins.models.News
+import com.iwelogic.crypto_coins.ui.coins.CoinAdapter
+import com.iwelogic.crypto_coins.ui.news.NewsAdapter
+import com.iwelogic.crypto_coins.utils.DimensionUtility
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class BindingAdapter {
     companion object {
@@ -30,18 +42,79 @@ class BindingAdapter {
         @JvmStatic
         fun convertHtml(view: TextView, html: String?) {
             html?.let {
-                val spanned = Html.fromHtml(html.replace("\n", "<br>"))
+                val spanned = Html.fromHtml("&nbsp;&nbsp;" + it.replace("\n", "<br>"))
                 view.text = spanned
-                view.setMovementMethod(LinkMovementMethod.getInstance())
             }
+        }
+
+
+        @SuppressLint("SetJavaScriptEnabled")
+        @BindingAdapter("url")
+        @JvmStatic
+        fun setUrl(webView: WebView, url: String) {
+            CookieManager.getInstance().setAcceptCookie(true)
+
+
+            CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true)
+
+            webView.getSettings().setJavaScriptEnabled(true)
+            webView.getSettings().setGeolocationEnabled(true)
+            webView.getSettings().setAppCacheEnabled(true)
+            webView.getSettings().setDatabaseEnabled(true)
+            webView.getSettings().setDomStorageEnabled(true)
+            webView.getSettings().setSupportMultipleWindows(true)
+
+            webView.loadUrl(url)
+
+            webView.webChromeClient = object : WebChromeClient(){
+                override fun onCreateWindow(view: WebView, dialog: Boolean, userGesture: Boolean, resultMsg: android.os.Message): Boolean {
+                    val href = view.handler.obtainMessage()
+                    view.requestFocusNodeHref(href)
+                    val urlWindow = href.data.getString("url")
+                    if (urlWindow != null){
+                        val i = Intent(Intent.ACTION_VIEW)
+                        i.data = Uri.parse(url)
+                        webView.context.startActivity(i)
+                    }
+                    return false
+                }
+            }
+        }
+
+
+        @BindingAdapter("android:timestamp_ago")
+        @JvmStatic
+        fun convertHtml(view: TextView, time: Long?) {
+            time?.let {
+                val ago = DateUtils.getRelativeTimeSpanString(time * 1000, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS)
+                view.text = ago
+            }
+        }
+
+        @BindingAdapter("android:visibility_error")
+        @JvmStatic
+        fun setVisibility(view: View, value: String) {
+            view.visibility = if (value.length > 0) View.VISIBLE else View.GONE
         }
 
         @BindingAdapter("android:src")
         @JvmStatic
         fun loadImage(imageView: ImageView, imageURL: String) {
             Glide.with(imageView.context)
-                .load(if(!TextUtils.isEmpty(imageURL)) imageURL else R.drawable.logo)
+                .load(if (!TextUtils.isEmpty(imageURL)) imageURL else R.drawable.logo)
                 .into(imageView)
+        }
+
+        @BindingAdapter(value = ["list", "listener"], requireAll = true)
+        @JvmStatic
+        fun setNews(list: RecyclerView, dates: ObservableList<News>, listener: ((News, ImageView, TextView, TextView) -> Unit)) {
+            list.adapter = NewsAdapter(dates, listener)
+        }
+
+        @BindingAdapter(value = ["coins", "listener"], requireAll = true)
+        @JvmStatic
+        fun setCoins(list: RecyclerView, coins: ObservableList<Coin>, listener: ((Coin) -> Unit)) {
+            list.adapter = CoinAdapter(coins.toList(), listener)
         }
 
         @BindingAdapter("chartData")

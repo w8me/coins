@@ -5,7 +5,7 @@ import com.iwelogic.crypto_coins.models.CoinDetails
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.QueryMap
-import java.util.HashMap
+import java.util.*
 
 interface Api {
 

@@ -7,12 +7,12 @@ apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.1"
+    buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.iwelogic.crypto_coins"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 6
+        versionCode 7
         versionName "1.0." + versionCode
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -31,9 +31,9 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [
-                        "room.schemaLocation":"$projectDir/schemas".toString(),
-                        "room.incremental":"true",
-                        "room.expandProjection":"true"]
+                        "room.schemaLocation"  : "$projectDir/schemas".toString(),
+                        "room.incremental"     : "true",
+                        "room.expandProjection": "true"]
             }
         }
         archivesBaseName = "$applicationId-v$versionName"
@@ -43,9 +43,9 @@ android {
 ext {
     androidXVersion = '1.1.0'
     archLifecycleVersion = '2.1.0'
-    roomVersion = '2.1.0'
+    roomVersion = '2.2.0'
     navigationVersion = '1.0.0'
-    lifecycle = '1.1.1'
+    lifecycle = '2.0.0'
     retrofitVersion = '2.6.0'
     glide = '4.9.0'
     okHttp = '3.6.0'
@@ -63,6 +63,7 @@ dependencies {
 
     // Architecture Components
     implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycleVersion"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "androidx.lifecycle:lifecycle-compiler:$archLifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$archLifecycleVersion"
     implementation "android.arch.lifecycle:extensions:$lifecycle"
@@ -92,7 +93,10 @@ dependencies {
 
     implementation 'com.google.android.gms:play-services-ads:18.2.0'
 
-    implementation 'com.google.firebase:firebase-analytics:17.2.0'
+    implementation 'com.google.firebase:firebase-analytics:17.2.1'
+    implementation 'androidx.viewpager2:viewpager2:1.0.0-rc01'
+    //noinspection GradleDependency
+    implementation "com.google.android.material:material:1.1.0-beta01"
 
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.iwelogic.crypto_coins.ui.news_details.NewsDetailsViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:orientation="horizontal"
+            android:background="@color/colorPrimary">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="?actionBarSize"
+                android:layout_height="?actionBarSize"
+                android:scaleType="centerInside"
+                android:contentDescription="@string/back"
+                android:src="@drawable/back" />
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="?actionBarSize"
+                android:layout_height="?actionBarSize"
+                android:layout_gravity="center"
+                android:contentDescription="?android:contentDescription"
+                android:scaleType="centerCrop"
+                android:padding="@dimen/quater_default_size"
+                android:src="@{viewModel.data.sourceInfo.img}"
+                app:transitionName="@{viewModel.data.id}" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@{viewModel.data.title}"
+                android:gravity="center"
+                android:textColor="@color/white"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="12sp"
+                android:layout_marginEnd="@dimen/default_size"
+                android:ellipsize="end"
+                app:transitionName="@{viewModel.data.title}" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <WebView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:url="@{viewModel.data.url}"/>
+        </FrameLayout>
+
+    </LinearLayout>
+
+</layout>

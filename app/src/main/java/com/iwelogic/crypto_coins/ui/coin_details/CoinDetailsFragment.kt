@@ -1,4 +1,4 @@
-package com.iwelogic.crypto_coins.ui.details
+package com.iwelogic.crypto_coins.ui.coin_details
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.iwelogic.crypto_coins.ui.MainActivity
 import com.iwelogic.crypto_coins.R
 import com.iwelogic.crypto_coins.databinding.FragmentCoinDetailsBinding
 import com.iwelogic.crypto_coins.models.Coin
+import kotlinx.android.synthetic.main.fragment_coin_details.*
 
 class CoinDetailsFragment : Fragment() {
 
@@ -21,14 +21,17 @@ class CoinDetailsFragment : Fragment() {
         val binding: FragmentCoinDetailsBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_coin_details, container, false)
         binding.viewModel = viewModel
         return binding.root
-    }
+}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val coin: Coin = CoinDetailsFragmentArgs.fromBundle(arguments!!).coin
-        (activity as MainActivity).updateTitle(coin.name)
         viewModel.coin = coin
         viewModel.load()
+
+        back.setOnClickListener {
+            activity?.onBackPressed()
+        }
     }
 }

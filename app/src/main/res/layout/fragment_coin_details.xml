@@ -4,52 +4,73 @@
 
     <data>
 
-        <import type="com.iwelogic.crypto_coins.base.BindingAdapter" />
-
         <variable
             name="viewModel"
-            type="com.iwelogic.crypto_coins.ui.details.CoinDetailsViewModel" />
+            type="com.iwelogic.crypto_coins.ui.coin_details.CoinDetailsViewModel" />
     </data>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:elevation="1dp"
-        app:onRefreshListener="@{() -> viewModel.load()}"
-        app:refreshing="@{viewModel.refreshing}">
+        android:orientation="vertical">
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white">
+            android:layout_height="?actionBarSize"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:id="@+id/main"
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="?actionBarSize"
+                android:layout_height="?actionBarSize"
+                android:scaleType="centerInside"
+                android:src="@drawable/back"
+                android:contentDescription="@string/back" />
+        </LinearLayout>
+
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:elevation="1dp"
+            app:onRefreshListener="@{() -> viewModel.load()}"
+            app:refreshing="@{viewModel.refreshing}">
+
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:background="@color/white">
 
-                <com.github.mikephil.charting.charts.LineChart
-                    android:id="@+id/coin_detail_chart"
+                <LinearLayout
+                    android:id="@+id/main"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:layout_margin="@dimen/quater_default_size"
-                    android:visibility="invisible"
-                    app:chartData="@{viewModel.history}" />
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/default_size"
-                    android:layout_marginTop="@dimen/half_default_size"
-                    android:layout_marginEnd="@dimen/default_size"
-                    android:layout_marginBottom="@dimen/default_size"
-                    android:html_text="@{viewModel.description}"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/coin_detail_chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:layout_margin="@dimen/quater_default_size"
+                        android:visibility="invisible"
+                        app:chartData="@{viewModel.history}" />
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/default_size"
+                        android:layout_marginTop="@dimen/half_default_size"
+                        android:layout_marginEnd="@dimen/default_size"
+                        android:layout_marginBottom="@dimen/default_size"
+                        android:html_text="@{viewModel.description}"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
 
-        </ScrollView>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                </LinearLayout>
+
+            </ScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </LinearLayout>
 </layout>

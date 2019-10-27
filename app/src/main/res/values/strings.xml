@@ -1,12 +1,13 @@
 <resources>
     <string name="ad_unit_id" translatable="false">ca-app-pub-8483070711143803/7666141372</string>
+    <string name="banner_news_list" translatable="false">ca-app-pub-8483070711143803/9295771444</string>
     <string name="ad_id" translatable="false">ca-app-pub-8483070711143803~6303155918</string>
 
     <string name="app_name">Crypto Coin</string>
     <string name="coin_details">Coin details</string>
     <string name="global_arrow_up">&#x25B2; %1$.2f</string>
     <string name="global_arrow_down">&#x25BC;  %1$.2f</string>
-    <string name="price">$%1$.4f</string >
+    <string name="price">$%1$.4f</string>
     <string name="select_background_color">Select Background Color:</string>
     <string name="background_color">Background Color</string>
     <string name="save">SAVE</string>
@@ -14,5 +15,9 @@
     <string name="create">Create</string>
     <string name="text_color">Text Color</string>
     <string name="currency">Currency</string>
+    <string name="error_loading">Error loading</string>
+    <string name="categories">Categories: %s</string>
+    <string name="refresh">Refresh</string>
+    <string name="back">back</string>
 
 </resources>

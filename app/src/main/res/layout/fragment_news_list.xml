@@ -3,19 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="android.view.View"/>
-        <import type="com.iwelogic.crypto_coins.base.BindingAdapter" />
         <variable
             name="viewModel"
-            type="com.iwelogic.crypto_coins.ui.coins.CoinListViewModel" />
+            type="com.iwelogic.crypto_coins.ui.news.NewsListViewModel" />
     </data>
 
     <FrameLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.coin_details.CoinDetailsFragment">
-
-
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
@@ -28,12 +24,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                app:coins="@{viewModel.mCoins}"
                 app:listener="@{viewModel.listener}"
+                app:list="@{viewModel.mNewsList}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"

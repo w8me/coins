@@ -76,7 +76,8 @@
                 android:maxLines="2"
                 android:layout_gravity="bottom"
                 android:textColor="@android:color/darker_gray"
-                android:ellipsize="end"/>
+                android:ellipsize="end"
+                android:layout_marginEnd="@dimen/default_size"/>
 
         </LinearLayout>
 

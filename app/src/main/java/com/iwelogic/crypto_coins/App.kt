@@ -9,8 +9,8 @@ class App : Application() {
 
     companion object {
         lateinit var instance: App
-        val timeX = 1578735938317
-        //val timeX = 0
+       // val timeX = 1578735938317
+        val timeX = 0
     }
 
     override fun onCreate() {

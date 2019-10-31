@@ -20,7 +20,7 @@
         <ImageView
             android:id="@+id/icon"
             android:layout_width="80dp"
-            android:padding="@dimen/quater_default_size"
+            android:padding="@dimen/quarter_default_size"
             android:layout_height="match_parent"
             android:scaleType="centerInside"/>
 

@@ -35,7 +35,7 @@
                 android:layout_gravity="center"
                 android:contentDescription="?android:contentDescription"
                 android:scaleType="centerCrop"
-                android:padding="@dimen/quater_default_size"
+                android:padding="@dimen/quarter_default_size"
                 android:src="@{viewModel.data.sourceInfo.img}"
                 app:transitionName="@{viewModel.data.id}" />
 

@@ -56,7 +56,7 @@ class CoinAdapter(items: List<Coin>, private val onClick: ((Coin) -> Unit)) : Ba
                         adView.tag = false
                     }
                 }
-                adView.loadAd(AdRequest.Builder().build())
+                adView.loadAd(AdRequest.Builder().addTestDevice("B6D402A58A4DC72BD8A2E0CB2F401652").build())
             }
         }
     }

@@ -47,7 +47,6 @@ class BindingAdapter {
             }
         }
 
-
         @SuppressLint("SetJavaScriptEnabled")
         @BindingAdapter("url")
         @JvmStatic
@@ -66,12 +65,12 @@ class BindingAdapter {
 
             webView.loadUrl(url)
 
-            webView.webChromeClient = object : WebChromeClient(){
+            webView.webChromeClient = object : WebChromeClient() {
                 override fun onCreateWindow(view: WebView, dialog: Boolean, userGesture: Boolean, resultMsg: android.os.Message): Boolean {
                     val href = view.handler.obtainMessage()
                     view.requestFocusNodeHref(href)
                     val urlWindow = href.data.getString("url")
-                    if (urlWindow != null){
+                    if (urlWindow != null) {
                         val i = Intent(Intent.ACTION_VIEW)
                         i.data = Uri.parse(url)
                         webView.context.startActivity(i)
@@ -80,7 +79,6 @@ class BindingAdapter {
                 }
             }
         }
-
 
         @BindingAdapter("android:timestamp_ago")
         @JvmStatic
@@ -119,103 +117,84 @@ class BindingAdapter {
 
         @BindingAdapter("chartData")
         @JvmStatic
-        fun setChartData(lineChart: LineChart, history: ObservableList<HistoryEntity>) {
+        fun setChartData(view: LineChart, history: ObservableList<HistoryEntity>) {
             if (history.size > 0) {
-                setupLineChart(lineChart, history.toList())
-                lineChart.visibility = View.VISIBLE
+                val maxVisibleValues = 365 * 5
+                val totalValues = history.size
+                val lastDate = history[history.size - 1].time
+
+                val lineWidth: Float = DimensionUtility.px2dp(view.context, view.resources.getDimension(R.dimen.chart_line_width))
+                val axisWidth: Float = DimensionUtility.px2dp(view.context, view.context.resources.getDimension(R.dimen.chart_axis_width))
+                val highlightWidth: Float = DimensionUtility.px2dp(view.context, view.context.resources.getDimension(R.dimen.chart_highlight_width))
+                val textSize: Float = DimensionUtility.px2dp(view.context, view.context.resources.getDimension(R.dimen.chart_text_size))
+
+                val lineColor: Int = ContextCompat.getColor(view.context, R.color.colorPrimary)
+                val axisColor: Int = ContextCompat.getColor(view.context, R.color.black)
+                val highlightColor: Int = ContextCompat.getColor(view.context, R.color.black)
+                val fillColor: Int = ContextCompat.getColor(view.context, R.color.colorPrimary)
+                val textColor: Int = ContextCompat.getColor(view.context, R.color.black)
+
+                val entries = ArrayList<Entry>()
+                history.mapIndexedTo(entries) { index, entity ->
+                    Entry(index.toFloat(), entity.close.toFloat())
+                }
+
+                val dataSet = LineDataSet(entries, null)
+                dataSet.lineWidth = lineWidth
+                dataSet.color = lineColor
+                dataSet.fillColor = fillColor
+                dataSet.fillAlpha = 48
+                dataSet.highlightLineWidth = highlightWidth
+                dataSet.highLightColor = highlightColor
+                dataSet.enableDashedHighlightLine(10F, 10F, 0F)
+                dataSet.setDrawFilled(true)
+                dataSet.setDrawCircles(false)
+                dataSet.setDrawValues(false)
+
+
+                val xAxis = view.xAxis
+                xAxis.valueFormatter = DayAxisValueFormatter(view, totalValues, lastDate)
+                xAxis.position = XAxis.XAxisPosition.BOTTOM
+                xAxis.labelRotationAngle = -45F
+                xAxis.axisLineWidth = axisWidth
+                xAxis.axisLineColor = axisColor
+
+                xAxis.textSize = textSize
+                xAxis.textColor = textColor
+                xAxis.typeface = Typeface.SANS_SERIF
+                xAxis.setDrawAxisLine(true)
+                xAxis.setDrawGridLines(false)
+                xAxis.setDrawLabels(true)
+                xAxis.setLabelCount(8, false)
+
+                val yAxis = view.axisLeft
+                yAxis.axisLineWidth = axisWidth
+                yAxis.axisLineColor = axisColor
+                yAxis.textSize = textSize
+                yAxis.textColor = textColor
+                yAxis.typeface = Typeface.SANS_SERIF
+                yAxis.setDrawAxisLine(true)
+                yAxis.setDrawGridLines(true)
+                yAxis.setDrawLabels(true)
+                yAxis.setLabelCount(10, false)
+
+                view.data = LineData(dataSet)
+                view.description = null
+                view.legend.isEnabled = false
+                view.axisRight.isEnabled = false
+
+                view.isScaleYEnabled = false
+                view.setVisibleXRangeMinimum(30F)
+                view.setVisibleXRangeMaximum(maxVisibleValues.toFloat())
+                view.zoom((if (totalValues > maxVisibleValues) maxVisibleValues else totalValues) / 182F, 1F, 0F, 0F)
+                view.moveViewToX(totalValues.toFloat())
+                view.animateY(500)
+                view.visibility = View.VISIBLE
             } else {
-                lineChart.visibility = View.GONE
+                view.visibility = View.GONE
             }
-        }
-
-        fun setupLineChart(lineChart: LineChart, history: List<HistoryEntity>) {
-            val context = lineChart.context
-            val maxVisibleValues = 365 * 5
-            val totalValues = history.size
-            val lastDate = history[history.size - 1].time
-
-            // dimens
-            val lineWidth: Float = DimensionUtility.px2dp(context, context.resources.getDimension(R.dimen.chart_line_width))
-            val axisWidth: Float = DimensionUtility.px2dp(context, context.resources.getDimension(R.dimen.chart_axis_width))
-            val gridWidth: Float = DimensionUtility.px2dp(context, context.resources.getDimension(R.dimen.chart_grid_width))
-            val highlightWidth: Float = DimensionUtility.px2dp(context, context.resources.getDimension(R.dimen.chart_highlight_width))
-            val textSize: Float = DimensionUtility.px2dp(context, context.resources.getDimension(R.dimen.chart_text_size))
-
-            // colors
-            val lineColor: Int = ContextCompat.getColor(context, R.color.colorPrimary)
-            val axisColor: Int = ContextCompat.getColor(context, R.color.black)
-            val highlightColor: Int = ContextCompat.getColor(context, R.color.black)
-            val fillColor: Int = ContextCompat.getColor(context, R.color.colorPrimary)
-            val textColor: Int = ContextCompat.getColor(context, R.color.black)
-
-            // data
-            val entries = ArrayList<Entry>()
-            history.mapIndexedTo(entries) { index, entity ->
-                Entry(index.toFloat(), entity.close.toFloat())
-            }
-
-            // data set style
-            val dataSet = LineDataSet(entries, null)
-            dataSet.lineWidth = lineWidth
-            dataSet.color = lineColor
-            dataSet.fillColor = fillColor
-            dataSet.fillAlpha = 48
-            dataSet.highlightLineWidth = highlightWidth
-            dataSet.highLightColor = highlightColor
-            dataSet.enableDashedHighlightLine(10F, 10F, 0F)
-            dataSet.setDrawFilled(true)
-            dataSet.setDrawCircles(false)
-            dataSet.setDrawValues(false)
-
-            // x axis style
-            val xAxis = lineChart.xAxis
-            xAxis.valueFormatter = DayAxisValueFormatter(lineChart, totalValues, lastDate)
-            xAxis.position = XAxis.XAxisPosition.BOTTOM
-            xAxis.labelRotationAngle = -45F
-            xAxis.axisLineWidth = axisWidth
-            xAxis.axisLineColor = axisColor
-
-            xAxis.textSize = textSize
-            xAxis.textColor = textColor
-            xAxis.typeface = Typeface.SANS_SERIF
-            xAxis.setDrawAxisLine(true)
-            xAxis.setDrawGridLines(false)
-            xAxis.setDrawLabels(true)
-            xAxis.setLabelCount(8, false)
-
-            // y axis style
-            val yAxis = lineChart.axisLeft
-            yAxis.axisLineWidth = axisWidth
-            yAxis.axisLineColor = axisColor
-            yAxis.textSize = textSize
-            yAxis.textColor = textColor
-            yAxis.typeface = Typeface.SANS_SERIF
-            yAxis.setDrawAxisLine(true)
-            yAxis.setDrawGridLines(true)
-            yAxis.setDrawLabels(true)
-            yAxis.setLabelCount(10, false)
-
-            // chart settings
-            lineChart.data = LineData(dataSet)
-            lineChart.description = null
-            lineChart.legend.isEnabled = false
-            lineChart.axisRight.isEnabled = false
-
-            // chart viewport
-            lineChart.isScaleYEnabled = false
-            lineChart.setVisibleXRangeMinimum(30F)
-            lineChart.setVisibleXRangeMaximum(maxVisibleValues.toFloat())
-            lineChart.zoom(determineZoom(totalValues, maxVisibleValues), 1F, 0F, 0F)
-            lineChart.moveViewToX(totalValues.toFloat()) // automatically calls invalidate()
-            lineChart.animateY(1000)
-        }
-
-        fun determineZoom(totalValues: Int, maxVisibleValues: Int): Float {
-            val visiblePoints: Int = if (totalValues > maxVisibleValues) maxVisibleValues else totalValues
-            return visiblePoints / 182F
         }
     }
-
 
     class DayAxisValueFormatter(private val chart: LineChart, private val totalValues: Int, private val lastDate: Date?) : IAxisValueFormatter {
         override fun getFormattedValue(value: Float, axis: AxisBase): String {

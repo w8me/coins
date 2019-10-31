@@ -53,7 +53,7 @@
                         android:id="@+id/coin_detail_chart"
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
-                        android:layout_margin="@dimen/quater_default_size"
+                        android:layout_margin="@dimen/quarter_default_size"
                         android:visibility="invisible"
                         app:chartData="@{viewModel.history}" />
 

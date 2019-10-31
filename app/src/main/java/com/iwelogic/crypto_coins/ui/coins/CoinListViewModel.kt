@@ -5,7 +5,6 @@ import androidx.databinding.ObservableField
 import androidx.databinding.ObservableList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.iwelogic.crypto_coins.App.Companion.timeX
 import com.iwelogic.crypto_coins.data.ApiModule
 import com.iwelogic.crypto_coins.models.Coin
 import kotlinx.coroutines.launch
@@ -28,13 +27,11 @@ class CoinListViewModel : ViewModel() {
                 queries["order"] = "market_cap_desc"
                 queries["vs_currency"] = "usd"
                 val result = ApiModule.api.getCoins(queries)
-                if (System.currentTimeMillis() > timeX) {
-                    for (i in 0 until result.size) {
-                        if (i == 5 || i == 30 || i == 55) {
-                            val coin = Coin()
-                            coin.isAd = true
-                            result.add(i, coin)
-                        }
+                for (i in 0 until result.size) {
+                    if (i == 5 || i == 30 || i == 55) {
+                        val coin = Coin()
+                        coin.isAd = true
+                        result.add(i, coin)
                     }
                 }
 
@@ -49,7 +46,7 @@ class CoinListViewModel : ViewModel() {
         }
     }
 
-    val listener: ((Coin) -> Unit) = {coin ->
+    val listener: ((Coin) -> Unit) = { coin ->
         navigator.openDetails(coin)
     }
 }

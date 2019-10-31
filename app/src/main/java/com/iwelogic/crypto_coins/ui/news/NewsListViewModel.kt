@@ -7,7 +7,6 @@ import androidx.databinding.ObservableField
 import androidx.databinding.ObservableList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.iwelogic.crypto_coins.App
 import com.iwelogic.crypto_coins.data.ApiModule
 import com.iwelogic.crypto_coins.models.News
 import kotlinx.coroutines.launch
@@ -27,20 +26,16 @@ class NewsListViewModel : ViewModel() {
                 error.set("")
                 val queries = HashMap<String, Any>()
                 queries["lang"] = "EN"
-                queries["api_key"] = "359e235f0e51a677c2f6c41a80a7b4de4e334e52c4c0ecfcd9b9c899f5af8939"
                 val result = ApiModule.apiHistory.getNews(queries)
                 val listNews = result.data
                 listNews?.let {
-                    if (System.currentTimeMillis() > App.timeX) {
-                        for (i in 0 until it.size) {
-                            if (i == 5 || i == 30 || i == 55) {
-                                val news = News()
-                                news.isAd = true
-                                listNews.add(i, news)
-                            }
+                    for (i in 0 until it.size) {
+                        if (i == 5 || i == 30 || i == 55) {
+                            val news = News()
+                            news.isAd = true
+                            listNews.add(i, news)
                         }
                     }
-
                     mNewsList.addAll(it)
                 }
 

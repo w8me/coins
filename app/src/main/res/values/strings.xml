@@ -3,6 +3,10 @@
     <string name="banner_news_list" translatable="false">ca-app-pub-8483070711143803/9295771444</string>
     <string name="ad_id" translatable="false">ca-app-pub-8483070711143803~6303155918</string>
 
+<!--    <string name="ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>-->
+<!--    <string name="banner_news_list" translatable="false">ca-app-pub-3940256099942544/6300978111</string>-->
+<!--    <string name="ad_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>-->
+
     <string name="app_name">Crypto Coin</string>
     <string name="coin_details">Coin details</string>
     <string name="global_arrow_up">&#x25B2; %1$.2f</string>

@@ -1,6 +1,7 @@
 package com.iwelogic.crypto_coins.ui.coin_details
 
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,11 +21,16 @@ class CoinDetailsFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(CoinDetailsViewModel::class.java)
         val binding: FragmentCoinDetailsBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_coin_details, container, false)
         binding.viewModel = viewModel
+        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(R.transition.move)
+
         return binding.root
 }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        name.postDelayed({ startPostponedEnterTransition() }, 1)
+        postponeEnterTransition()
 
         val coin: Coin = CoinDetailsFragmentArgs.fromBundle(arguments!!).coin
         viewModel.coin = coin

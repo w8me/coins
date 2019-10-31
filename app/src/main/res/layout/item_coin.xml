@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <import type="com.iwelogic.crypto_coins.base.BindingAdapter" />
@@ -21,10 +22,12 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/image"
                 android:layout_width="52dp"
                 android:layout_height="52dp"
                 android:layout_marginStart="@dimen/default_size"
                 android:contentDescription="@string/logo"
+                app:transitionName="@{coin.image}"
                 android:src="@{coin.image}" />
 
             <LinearLayout
@@ -36,11 +39,13 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@{coin.name}"
                     android:textColor="#000"
+                    app:transitionName="@{coin.name}"
                     android:textSize="18sp" />
 
                 <TextView

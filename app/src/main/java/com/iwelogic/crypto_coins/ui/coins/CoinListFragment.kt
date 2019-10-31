@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.iwelogic.crypto_coins.R
 import com.iwelogic.crypto_coins.databinding.FragmentCoinListBinding
@@ -29,7 +32,11 @@ class CoinListFragment : Fragment(), CoinListNavigator {
         return binding!!.root
     }
 
-    override fun openDetails(coin: Coin) {
-        findNavController().navigate(MainFragmentDirections.actionMainFragmentToCoinDetailsFragment(coin))
+    override fun openDetails(coin: Coin, name: TextView, image: ImageView) {
+        val extras = FragmentNavigatorExtras(
+            name to coin.name,
+            image to coin.image
+        )
+        findNavController().navigate(MainFragmentDirections.actionMainFragmentToCoinDetailsFragment(coin), extras)
     }
 }

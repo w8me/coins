@@ -2,6 +2,8 @@ package com.iwelogic.crypto_coins.ui.coins
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.ads.AdListener
@@ -13,7 +15,7 @@ import com.iwelogic.crypto_coins.databinding.ItemCoinBinding
 import com.iwelogic.crypto_coins.models.Coin
 import kotlinx.android.synthetic.main.item_ad_coins.view.*
 
-class CoinAdapter(items: List<Coin>, private val onClick: ((Coin) -> Unit)) : BaseRecyclerAdapter<Coin>(items) {
+class CoinAdapter(items: List<Coin>, private val onClick: ((Coin, TextView, ImageView) -> Unit)) : BaseRecyclerAdapter<Coin>(items) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if(viewType == 1){
@@ -36,7 +38,7 @@ class CoinAdapter(items: List<Coin>, private val onClick: ((Coin) -> Unit)) : Ba
             binding.coin = coin
             binding.executePendingBindings()
             binding.root.setOnClickListener {
-                onClick(coin)
+                onClick(coin, binding.root.findViewById(R.id.name),  binding.root.findViewById(R.id.image))
             }
         }
     }

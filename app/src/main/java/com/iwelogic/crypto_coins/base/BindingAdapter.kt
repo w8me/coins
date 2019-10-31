@@ -111,7 +111,7 @@ class BindingAdapter {
 
         @BindingAdapter(value = ["coins", "listener"], requireAll = true)
         @JvmStatic
-        fun setCoins(list: RecyclerView, coins: ObservableList<Coin>, listener: ((Coin) -> Unit)) {
+        fun setCoins(list: RecyclerView, coins: ObservableList<Coin>, listener: ((Coin, TextView, ImageView) -> Unit)) {
             list.adapter = CoinAdapter(coins.toList(), listener)
         }
 

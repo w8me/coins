@@ -1,5 +1,7 @@
 package com.iwelogic.crypto_coins.ui.coins
 
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableList
@@ -46,7 +48,7 @@ class CoinListViewModel : ViewModel() {
         }
     }
 
-    val listener: ((Coin) -> Unit) = { coin ->
-        navigator.openDetails(coin)
+    val listener: ((Coin, TextView, ImageView) -> Unit) = { coin, name, image ->
+        navigator.openDetails(coin, name, image)
     }
 }

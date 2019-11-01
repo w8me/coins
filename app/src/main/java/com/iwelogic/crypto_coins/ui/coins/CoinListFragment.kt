@@ -20,11 +20,11 @@ import kotlinx.android.synthetic.main.fragment_news_list.*
 class CoinListFragment : Fragment(), CoinListNavigator {
 
     private lateinit var viewModel: CoinListViewModel
-    private var binding : FragmentCoinListBinding? = null
+    private var binding: FragmentCoinListBinding? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewModel = ViewModelProviders.of(this).get(CoinListViewModel::class.java)
-        if(binding == null){
+        if (binding == null) {
             binding = DataBindingUtil.inflate(inflater, R.layout.fragment_coin_list, container, false)
             binding?.viewModel = viewModel
             viewModel.navigator = this
@@ -45,10 +45,14 @@ class CoinListFragment : Fragment(), CoinListNavigator {
     }
 
     override fun openDetails(coin: Coin, name: TextView, image: ImageView) {
-        val extras = FragmentNavigatorExtras(
-            name to coin.name,
-            image to coin.image
-        )
-        findNavController().navigate(MainFragmentDirections.actionMainFragmentToCoinDetailsFragment(coin), extras)
+        try {
+            val extras = FragmentNavigatorExtras(
+                name to coin.name,
+                image to coin.image
+            )
+            findNavController().navigate(MainFragmentDirections.actionMainFragmentToCoinDetailsFragment(coin), extras)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }

@@ -15,6 +15,7 @@ import com.iwelogic.crypto_coins.R
 import com.iwelogic.crypto_coins.databinding.FragmentCoinListBinding
 import com.iwelogic.crypto_coins.models.Coin
 import com.iwelogic.crypto_coins.ui.main.MainFragmentDirections
+import kotlinx.android.synthetic.main.fragment_news_list.*
 
 class CoinListFragment : Fragment(), CoinListNavigator {
 
@@ -30,6 +31,17 @@ class CoinListFragment : Fragment(), CoinListNavigator {
             viewModel.load()
         }
         return binding!!.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        list.apply {
+            parentFragment?.postponeEnterTransition()
+            viewTreeObserver.addOnPreDrawListener {
+                parentFragment?.startPostponedEnterTransition()
+                true
+            }
+        }
     }
 
     override fun openDetails(coin: Coin, name: TextView, image: ImageView) {

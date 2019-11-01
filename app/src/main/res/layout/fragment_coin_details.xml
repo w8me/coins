@@ -42,7 +42,7 @@
                 android:layout_height="match_parent"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                android:gravity="center"
+                android:gravity="center_vertical"
                 android:layout_marginEnd="?actionBarSize"
                 app:transitionName="@{viewModel.coin.name}"
                 android:text="@{viewModel.coin.name}" />
@@ -71,10 +71,10 @@
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/coin_detail_chart"
                         android:layout_width="match_parent"
-                        android:layout_height="300dp"
+                        android:layout_height="320dp"
                         android:layout_margin="@dimen/quarter_default_size"
                         android:visibility="invisible"
-                        app:chartData="@{viewModel.history}" />
+                        app:data="@{viewModel.history}"/>
 
                     <TextView
                         android:layout_width="match_parent"

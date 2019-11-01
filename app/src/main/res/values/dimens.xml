@@ -4,11 +4,4 @@
     <dimen name="half_default_size">8dp</dimen>
     <dimen name="quarter_default_size">4dp</dimen>
 
-
-    <dimen name="chart_line_width">1dp</dimen>
-    <dimen name="chart_axis_width">2dp</dimen>
-    <dimen name="chart_grid_width">1dp</dimen>
-    <dimen name="chart_highlight_width">1dp</dimen>
-    <dimen name="chart_marker_padding">2dp</dimen>
-    <dimen name="chart_text_size">12sp</dimen>
 </resources>

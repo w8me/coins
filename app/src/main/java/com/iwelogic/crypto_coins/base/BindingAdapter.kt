@@ -2,11 +2,11 @@ package com.iwelogic.crypto_coins.base
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Typeface
 import android.net.Uri
 import android.text.Html
 import android.text.TextUtils
 import android.text.format.DateUtils
+import android.util.TypedValue
 import android.view.View
 import android.webkit.CookieManager
 import android.webkit.WebChromeClient
@@ -31,7 +31,6 @@ import com.iwelogic.crypto_coins.models.Coin
 import com.iwelogic.crypto_coins.models.News
 import com.iwelogic.crypto_coins.ui.coins.CoinAdapter
 import com.iwelogic.crypto_coins.ui.news.NewsAdapter
-import com.iwelogic.crypto_coins.utils.DimensionUtility
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -52,8 +51,6 @@ class BindingAdapter {
         @JvmStatic
         fun setUrl(webView: WebView, url: String) {
             CookieManager.getInstance().setAcceptCookie(true)
-
-
             CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true)
 
             webView.getSettings().setJavaScriptEnabled(true)
@@ -115,24 +112,12 @@ class BindingAdapter {
             list.adapter = CoinAdapter(coins.toList(), listener)
         }
 
-        @BindingAdapter("chartData")
+        @BindingAdapter("data")
         @JvmStatic
         fun setChartData(view: LineChart, history: ObservableList<HistoryEntity>) {
             if (history.size > 0) {
-                val maxVisibleValues = 365 * 5
                 val totalValues = history.size
                 val lastDate = history[history.size - 1].time
-
-                val lineWidth: Float = DimensionUtility.px2dp(view.context, view.resources.getDimension(R.dimen.chart_line_width))
-                val axisWidth: Float = DimensionUtility.px2dp(view.context, view.context.resources.getDimension(R.dimen.chart_axis_width))
-                val highlightWidth: Float = DimensionUtility.px2dp(view.context, view.context.resources.getDimension(R.dimen.chart_highlight_width))
-                val textSize: Float = DimensionUtility.px2dp(view.context, view.context.resources.getDimension(R.dimen.chart_text_size))
-
-                val lineColor: Int = ContextCompat.getColor(view.context, R.color.colorPrimary)
-                val axisColor: Int = ContextCompat.getColor(view.context, R.color.black)
-                val highlightColor: Int = ContextCompat.getColor(view.context, R.color.black)
-                val fillColor: Int = ContextCompat.getColor(view.context, R.color.colorPrimary)
-                val textColor: Int = ContextCompat.getColor(view.context, R.color.black)
 
                 val entries = ArrayList<Entry>()
                 history.mapIndexedTo(entries) { index, entity ->
@@ -140,53 +125,48 @@ class BindingAdapter {
                 }
 
                 val dataSet = LineDataSet(entries, null)
-                dataSet.lineWidth = lineWidth
-                dataSet.color = lineColor
-                dataSet.fillColor = fillColor
-                dataSet.fillAlpha = 48
-                dataSet.highlightLineWidth = highlightWidth
-                dataSet.highLightColor = highlightColor
+                dataSet.lineWidth = view.resources.displayMetrics.density * 1
+                dataSet.color = ContextCompat.getColor(view.context, R.color.colorPrimary)
+                dataSet.fillColor = ContextCompat.getColor(view.context, R.color.colorPrimary)
+                dataSet.fillAlpha = 50
+                dataSet.highlightLineWidth = view.resources.displayMetrics.density * 1
+                dataSet.highLightColor = ContextCompat.getColor(view.context, R.color.black)
                 dataSet.enableDashedHighlightLine(10F, 10F, 0F)
                 dataSet.setDrawFilled(true)
                 dataSet.setDrawCircles(false)
                 dataSet.setDrawValues(false)
 
-
                 val xAxis = view.xAxis
-                xAxis.valueFormatter = DayAxisValueFormatter(view, totalValues, lastDate)
+                xAxis.valueFormatter = TimeValueFormatter(view, totalValues, lastDate)
                 xAxis.position = XAxis.XAxisPosition.BOTTOM
-                xAxis.labelRotationAngle = -45F
-                xAxis.axisLineWidth = axisWidth
-                xAxis.axisLineColor = axisColor
+                xAxis.axisLineWidth = view.resources.displayMetrics.density * 1
+                xAxis.axisLineColor = ContextCompat.getColor(view.context, R.color.black)
 
-                xAxis.textSize = textSize
-                xAxis.textColor = textColor
-                xAxis.typeface = Typeface.SANS_SERIF
+                xAxis.textSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 4f, view.resources.displayMetrics)
+                xAxis.textColor = ContextCompat.getColor(view.context, R.color.black)
                 xAxis.setDrawAxisLine(true)
-                xAxis.setDrawGridLines(false)
+                xAxis.setDrawGridLines(true)
                 xAxis.setDrawLabels(true)
-                xAxis.setLabelCount(8, false)
+                xAxis.setLabelCount(6, false)
 
                 val yAxis = view.axisLeft
-                yAxis.axisLineWidth = axisWidth
-                yAxis.axisLineColor = axisColor
-                yAxis.textSize = textSize
-                yAxis.textColor = textColor
-                yAxis.typeface = Typeface.SANS_SERIF
+                yAxis.axisLineWidth = view.resources.displayMetrics.density * 1
+                yAxis.axisLineColor = ContextCompat.getColor(view.context, R.color.black)
+                yAxis.textSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 4f, view.resources.displayMetrics)
+                yAxis.textColor = ContextCompat.getColor(view.context, R.color.black)
                 yAxis.setDrawAxisLine(true)
                 yAxis.setDrawGridLines(true)
                 yAxis.setDrawLabels(true)
-                yAxis.setLabelCount(10, false)
+                yAxis.setLabelCount(8, false)
 
                 view.data = LineData(dataSet)
                 view.description = null
                 view.legend.isEnabled = false
                 view.axisRight.isEnabled = false
 
-                view.isScaleYEnabled = false
                 view.setVisibleXRangeMinimum(30F)
-                view.setVisibleXRangeMaximum(maxVisibleValues.toFloat())
-                view.zoom((if (totalValues > maxVisibleValues) maxVisibleValues else totalValues) / 182F, 1F, 0F, 0F)
+                view.setVisibleXRangeMaximum(1500F)
+                view.zoom(100F, 1F, 0F, 0F)
                 view.moveViewToX(totalValues.toFloat())
                 view.animateY(500)
                 view.visibility = View.VISIBLE
@@ -196,49 +176,33 @@ class BindingAdapter {
         }
     }
 
-    class DayAxisValueFormatter(private val chart: LineChart, private val totalValues: Int, private val lastDate: Date?) : IAxisValueFormatter {
+    class TimeValueFormatter(private val chart: LineChart, private val totalValues: Int, private val lastDate: Date?) : IAxisValueFormatter {
         override fun getFormattedValue(value: Float, axis: AxisBase): String {
             val range = chart.visibleXRange
-            val date = determineDate(value, totalValues, lastDate)
-            return when {
+            val diff: Int = totalValues - value.toInt()
+            val temp = Calendar.getInstance(Locale.US)
+            lastDate?.let {
+                temp.time = lastDate
+            }
+            temp.add(Calendar.DATE, -diff)
+            val date = temp.time
+            when {
                 range > 365 * 3 -> {
                     chart.xAxis.granularity = 92F
-                    formatQuarter(date)
+                    val cal = Calendar.getInstance(Locale.US)
+                    cal.time = date
+                    val quarter = cal.get(Calendar.MONTH) / 3 + 1
+                    return "${SimpleDateFormat("yy", Locale.US).format(date)}/Q$quarter"
                 }
                 range > 30 * 6 -> {
                     chart.xAxis.granularity = 31F
-                    formatMonth(date)
+                    return SimpleDateFormat("yy/MM", Locale.US).format(date)
                 }
                 else -> {
                     chart.xAxis.granularity = 1F
-                    formatDay(date)
+                    return SimpleDateFormat("MM/dd", Locale.US).format(date)
                 }
             }
-        }
-
-        fun determineDate(xValue: Float, totalValues: Int, lastDate: Date?): Date {
-            val diff: Int = totalValues - xValue.toInt()
-            val cal = Calendar.getInstance(Locale.US)
-            lastDate?.let {
-                cal.time = lastDate
-            }
-            cal.add(Calendar.DATE, -diff)
-            return cal.time
-        }
-
-        private fun formatQuarter(date: Date): String {
-            val cal = Calendar.getInstance(Locale.US)
-            cal.time = date
-            val quarter = cal.get(Calendar.MONTH) / 3 + 1
-            return "${SimpleDateFormat("yy", Locale.US).format(date)}/Q$quarter"
-        }
-
-        private fun formatMonth(date: Date): String {
-            return SimpleDateFormat("yy/MM", Locale.US).format(date)
-        }
-
-        private fun formatDay(date: Date): String {
-            return SimpleDateFormat("MM/dd", Locale.US).format(date)
         }
     }
 }

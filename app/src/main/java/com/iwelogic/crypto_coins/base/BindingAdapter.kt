@@ -147,6 +147,7 @@ class BindingAdapter {
                 xAxis.setDrawAxisLine(true)
                 xAxis.setDrawGridLines(true)
                 xAxis.setDrawLabels(true)
+                //test
                 xAxis.setLabelCount(6, false)
 
                 val yAxis = view.axisLeft

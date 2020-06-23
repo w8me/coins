@@ -34,7 +34,7 @@ class DateDeserializer : JsonDeserializer<Date> {
 			return Date(timestamp)
 		} catch (e: NumberFormatException) {
 			val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US)
-			dateFormat.timeZone = TimeZone.getTimeZone("GMT")
+			dateFormat.timeZone = TimeZone.getDefault()
 			return dateFormat.parse(json?.asString)
 		}
 	}
